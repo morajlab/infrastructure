@@ -317,6 +317,88 @@
           }
         }
       }
+    },
+    "formaxui-utils": {
+      "root": "libs/formaxui/utils",
+      "sourceRoot": "libs/formaxui/utils/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/formaxui/utils",
+            "tsConfig": "libs/formaxui/utils/tsconfig.lib.json",
+            "project": "libs/formaxui/utils/package.json",
+            "entryFile": "libs/formaxui/utils/src/index.ts",
+            "external": ["react", "react-dom"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/formaxui/utils/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/formaxui/utils/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/formaxui/utils"],
+          "options": {
+            "jestConfig": "libs/formaxui/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "formaxui-utils-src-lib-style": {
+      "root": "libs/formaxui/utils/src/lib/style",
+      "sourceRoot": "libs/formaxui/utils/src/lib/style/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/formaxui/utils/src/lib/style",
+            "tsConfig": "libs/formaxui/utils/src/lib/style/tsconfig.lib.json",
+            "project": "libs/formaxui/utils/src/lib/style/package.json",
+            "entryFile": "libs/formaxui/utils/src/lib/style/src/index.ts",
+            "external": ["react", "react-dom"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/formaxui/utils/src/lib/style/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/formaxui/utils/src/lib/style/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/formaxui/utils/src/lib/style"],
+          "options": {
+            "jestConfig": "libs/formaxui/utils/src/lib/style/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

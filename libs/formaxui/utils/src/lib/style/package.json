@@ -1,0 +1,7 @@
+{
+  "name": "@formaxui/utils-style",
+  "version": "0.0.1",
+  "dependencies": {
+    "glamor": "^2.20.40"
+  }
+}

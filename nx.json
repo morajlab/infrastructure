@@ -37,6 +37,12 @@
     },
     "formaxui-types": {
       "tags": []
+    },
+    "formaxui-utils": {
+      "tags": []
+    },
+    "formaxui-utils-src-lib-style": {
+      "tags": []
     }
   }
 }

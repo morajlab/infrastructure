@@ -22,7 +22,11 @@
       "@formaxui/components-window": [
         "libs/formaxui/components/src/lib/window/src/index.ts"
       ],
-      "@formaxui/types": ["libs/formaxui/types/src/index.ts"]
+      "@formaxui/types": ["libs/formaxui/types/src/index.ts"],
+      "@formaxui/utils": ["libs/formaxui/utils/src/index.ts"],
+      "@formaxui/utils-style": [
+        "libs/formaxui/utils/src/lib/style/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
