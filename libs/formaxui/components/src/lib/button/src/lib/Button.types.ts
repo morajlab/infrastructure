@@ -1,6 +1,21 @@
-export interface IButtonProps {
-  title: string;
+export interface IThemeProps {
+  color?: string;
+  backgroundColor?: string;
+  borderColor?: string;
+  borderRadius?: number;
 }
 
-// eslint-disable-next-line
-export interface IButtonStyleProps {}
+export interface IStatusProps {
+  default?: IThemeProps;
+  hover?: IThemeProps;
+  active?: IThemeProps;
+}
+
+export interface IButtonProps {
+  text: string;
+  theme?: IStatusProps;
+}
+
+export interface IButtonStyleProps {
+  theme: IButtonProps['theme'];
+}

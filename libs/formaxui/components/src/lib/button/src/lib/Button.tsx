@@ -1,19 +1,25 @@
 import { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import { Styles } from './Button.styles';
 import type { IButtonProps } from './Button.types';
 
 export class Button extends Component<IButtonProps> {
-  render() {
-    const { root } = Styles({});
+  componentDidMount() {
+    findDOMNode(this)?.addEventListener('click', this.onClickHandler);
+  }
 
-    return (
-      <div {...root}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-        perferendis corrupti provident incidunt officiis nam. Repellat ipsam
-        quam, dolore modi mollitia, laudantium ducimus vitae expedita nemo alias
-        pariatur blanditiis eligendi!
-      </div>
-    );
+  componentWillUnmount() {
+    findDOMNode(this)?.removeEventListener('click', this.onClickHandler);
+  }
+
+  onClickHandler = () => {
+    console.log('This is for test');
+  };
+
+  render() {
+    const { root } = Styles({ theme: this.props.theme });
+
+    return <div {...root}>{this.props.text}</div>;
   }
 }
 
