@@ -1,0 +1,42 @@
+{
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "workspace",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "ZWEyYWJjZDAtZTMzNS00ODA4LWEzZjItYWRmMGNmMmM5YWNjfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "formaxui-components": {
+      "tags": []
+    },
+    "formaxui-components-e2e": {
+      "tags": [],
+      "implicitDependencies": ["formaxui-components"]
+    },
+    "formaxui-components-src-lib-button": {
+      "tags": []
+    },
+    "formaxui-components-src-lib-window": {
+      "tags": []
+    },
+    "formaxui-types": {
+      "tags": []
+    }
+  }
+}
