@@ -44,5 +44,13 @@
     "formaxui-utils-src-lib-style": {
       "tags": []
     }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
   }
 }

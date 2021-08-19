@@ -1,1 +1,1 @@
-export * from './lib/FormaxuiComponentsSrcLibButton';
+export * from './lib';

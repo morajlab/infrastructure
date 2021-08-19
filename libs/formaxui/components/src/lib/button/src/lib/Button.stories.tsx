@@ -1,17 +1,15 @@
 import { Story, Meta } from '@storybook/react';
-import {
-  FormaxuiComponentsSrcLibWindow,
-  FormaxuiComponentsSrcLibWindowProps,
-} from './FormaxuiComponentsSrcLibWindow';
+import { Button, IButtonProps } from '.';
 
 export default {
-  component: FormaxuiComponentsSrcLibWindow,
-  title: 'FormaxuiComponentsSrcLibWindow',
+  component: Button,
+  title: 'Components/Button',
 } as Meta;
 
-const Template: Story<FormaxuiComponentsSrcLibWindowProps> = (args) => (
-  <FormaxuiComponentsSrcLibWindow {...args} />
-);
+const Template: Story<IButtonProps> = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {};
+
+Primary.args = {
+  title: 'Primary Button',
+};
