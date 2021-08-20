@@ -278,6 +278,79 @@
         }
       }
     },
+    "formaxui-components-src-lib-title-bar": {
+      "root": "libs/formaxui/components/src/lib/title-bar",
+      "sourceRoot": "libs/formaxui/components/src/lib/title-bar/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/formaxui/components/src/lib/title-bar",
+            "tsConfig": "libs/formaxui/components/src/lib/title-bar/tsconfig.lib.json",
+            "project": "libs/formaxui/components/src/lib/title-bar/package.json",
+            "entryFile": "libs/formaxui/components/src/lib/title-bar/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/formaxui/components/src/lib/title-bar/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/formaxui/components/src/lib/title-bar/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/formaxui/components/src/lib/title-bar"],
+          "options": {
+            "jestConfig": "libs/formaxui/components/src/lib/title-bar/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/formaxui/components/src/lib/title-bar/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/formaxui-components-src-lib-title-bar",
+            "config": {
+              "configFolder": "libs/formaxui/components/src/lib/title-bar/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
     "formaxui-components-src-lib-window": {
       "root": "libs/formaxui/components/src/lib/window",
       "sourceRoot": "libs/formaxui/components/src/lib/window/src",

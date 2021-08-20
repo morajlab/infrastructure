@@ -4,16 +4,14 @@ import type { IWindowStyleProps } from './Window.types';
 // eslint-disable-next-line
 export const Styles = ({}: IWindowStyleProps) => {
   return {
-    root: style({
-      minWidth: '400px',
-      minHeight: '400px',
-      width: '500px',
-      height: '300px',
-    }),
+    root: style({}),
+    titleBar: style({}),
     iframe: style({
       border: 'none',
       userSelect: 'none',
       WebkitUserDrag: 'none',
+    }),
+    fullSize: style({
       position: 'absolute',
       inset: 0,
       width: '100%',
