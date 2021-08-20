@@ -1,3 +1,5 @@
+import type { IStyleProps } from '@formaxui/types';
+
 export interface IThemeProps {
   color?: string;
   backgroundColor?: string;
@@ -12,8 +14,8 @@ export interface IStatusProps {
 }
 
 export interface IButtonProps {
-  text: string;
   theme?: IStatusProps;
+  styles?: IStyleProps;
   onClick?: () => void;
 }
 

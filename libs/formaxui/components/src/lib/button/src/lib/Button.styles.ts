@@ -19,10 +19,10 @@ export const Styles = ({ theme }: IButtonStyleProps) => {
       userSelect: 'none',
       transition: 'all 0.1s ease-in-out',
       '&:hover': {
-        ...Object.assign({}, theme?.hover ?? {}),
+        ...(theme?.hover ?? {}),
       },
       '&:active': {
-        ...Object.assign({}, theme?.active ?? {}),
+        ...(theme?.active ?? {}),
       },
     }),
   };

@@ -27,7 +27,11 @@ export class Button extends Component<IButtonProps> {
   render() {
     const { root } = Styles({ theme: this.props.theme });
 
-    return <div {...root}>{this.props.text}</div>;
+    return (
+      <div {...{ ...root, ...(this.props?.styles ?? {}) }}>
+        {this.props.children}
+      </div>
+    );
   }
 }
 

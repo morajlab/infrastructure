@@ -29,6 +29,9 @@
       "tags": [],
       "implicitDependencies": ["formaxui-components"]
     },
+    "formaxui-components-src-lib-acrylic": {
+      "tags": []
+    },
     "formaxui-components-src-lib-button": {
       "tags": []
     },

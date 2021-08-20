@@ -132,6 +132,79 @@
         }
       }
     },
+    "formaxui-components-src-lib-acrylic": {
+      "root": "libs/formaxui/components/src/lib/acrylic",
+      "sourceRoot": "libs/formaxui/components/src/lib/acrylic/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/formaxui/components/src/lib/acrylic",
+            "tsConfig": "libs/formaxui/components/src/lib/acrylic/tsconfig.lib.json",
+            "project": "libs/formaxui/components/src/lib/acrylic/package.json",
+            "entryFile": "libs/formaxui/components/src/lib/acrylic/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/formaxui/components/src/lib/acrylic/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/formaxui/components/src/lib/acrylic/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/formaxui/components/src/lib/acrylic"],
+          "options": {
+            "jestConfig": "libs/formaxui/components/src/lib/acrylic/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/formaxui/components/src/lib/acrylic/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/formaxui-components-src-lib-acrylic",
+            "config": {
+              "configFolder": "libs/formaxui/components/src/lib/acrylic/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
     "formaxui-components-src-lib-button": {
       "root": "libs/formaxui/components/src/lib/button",
       "sourceRoot": "libs/formaxui/components/src/lib/button/src",

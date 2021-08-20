@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@formaxui/components": ["libs/formaxui/components/src/index.ts"],
+      "@formaxui/components-acrylic": [
+        "libs/formaxui/components/src/lib/acrylic/src/index.ts"
+      ],
       "@formaxui/components-button": [
         "libs/formaxui/components/src/lib/button/src/index.ts"
       ],
