@@ -19,6 +19,9 @@
       "@formaxui/components-button": [
         "libs/formaxui/components/src/lib/button/src/index.ts"
       ],
+      "@formaxui/components-rnd": [
+        "libs/formaxui/components/src/lib/rnd/src/index.ts"
+      ],
       "@formaxui/components-window": [
         "libs/formaxui/components/src/lib/window/src/index.ts"
       ],

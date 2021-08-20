@@ -14,6 +14,7 @@ export interface IStatusProps {
 export interface IButtonProps {
   text: string;
   theme?: IStatusProps;
+  onClick?: () => void;
 }
 
 export interface IButtonStyleProps {

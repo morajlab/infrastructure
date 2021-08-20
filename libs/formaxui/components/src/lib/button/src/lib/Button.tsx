@@ -14,6 +14,14 @@ export class Button extends Component<IButtonProps> {
 
   onClickHandler = () => {
     console.log('This is for test');
+
+    if (this.props.onClick) {
+      try {
+        this.props.onClick();
+      } catch (_error) {
+        // Do nothing
+      }
+    }
   };
 
   render() {
