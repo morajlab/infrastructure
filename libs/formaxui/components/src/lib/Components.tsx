@@ -1,4 +1,6 @@
 /* eslint-disable */
+export * from '@formaxui/components-acrylic';
 export * from '@formaxui/components-button';
-export * from '@formaxui/components-window';
 export * from '@formaxui/components-rnd';
+export * from '@formaxui/components-titlebar';
+export * from '@formaxui/components-window';

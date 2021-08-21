@@ -31,6 +31,7 @@
       "@formaxui/components-window": [
         "libs/formaxui/components/src/lib/window/src/index.ts"
       ],
+      "@formaxui/storybook": ["libs/formaxui/storybook/src/index.ts"],
       "@formaxui/types": ["libs/formaxui/types/src/index.ts"],
       "@formaxui/utils": ["libs/formaxui/utils/src/index.ts"],
       "@formaxui/utils-style": [
