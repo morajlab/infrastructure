@@ -537,6 +537,48 @@
         }
       }
     },
+    "formaxui-storybook-src-lib-components": {
+      "root": "libs/formaxui/storybook/src/lib/components",
+      "sourceRoot": "libs/formaxui/storybook/src/lib/components/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/formaxui/storybook/src/lib/components",
+            "tsConfig": "libs/formaxui/storybook/src/lib/components/tsconfig.lib.json",
+            "project": "libs/formaxui/storybook/src/lib/components/package.json",
+            "entryFile": "libs/formaxui/storybook/src/lib/components/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/formaxui/storybook/src/lib/components/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/formaxui/storybook/src/lib/components/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/formaxui/storybook/src/lib/components"],
+          "options": {
+            "jestConfig": "libs/formaxui/storybook/src/lib/components/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "formaxui-types": {
       "root": "libs/formaxui/types",
       "sourceRoot": "libs/formaxui/types/src",
