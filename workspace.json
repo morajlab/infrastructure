@@ -742,6 +742,132 @@
           }
         }
       }
+    },
+    "morajlab-storybook": {
+      "root": "libs/morajlab/storybook",
+      "sourceRoot": "libs/morajlab/storybook/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/morajlab/storybook",
+            "tsConfig": "libs/morajlab/storybook/tsconfig.lib.json",
+            "project": "libs/morajlab/storybook/package.json",
+            "entryFile": "libs/morajlab/storybook/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/morajlab/storybook/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/morajlab/storybook/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/morajlab/storybook"],
+          "options": {
+            "jestConfig": "libs/morajlab/storybook/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "morajlab-storybook-src-lib-addon": {
+      "root": "libs/morajlab/storybook/src/lib/addon",
+      "sourceRoot": "libs/morajlab/storybook/src/lib/addon/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/morajlab/storybook/src/lib/addon",
+            "tsConfig": "libs/morajlab/storybook/src/lib/addon/tsconfig.lib.json",
+            "project": "libs/morajlab/storybook/src/lib/addon/package.json",
+            "entryFile": "libs/morajlab/storybook/src/lib/addon/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/morajlab/storybook/src/lib/addon/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/morajlab/storybook/src/lib/addon/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/morajlab/storybook/src/lib/addon"],
+          "options": {
+            "jestConfig": "libs/morajlab/storybook/src/lib/addon/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "morajlab-storybook-src-lib-addon-src-lib-essentials": {
+      "root": "libs/morajlab/storybook/src/lib/addon/src/lib/essentials",
+      "sourceRoot": "libs/morajlab/storybook/src/lib/addon/src/lib/essentials/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/morajlab/storybook/src/lib/addon/src/lib/essentials",
+            "tsConfig": "libs/morajlab/storybook/src/lib/addon/src/lib/essentials/tsconfig.lib.json",
+            "project": "libs/morajlab/storybook/src/lib/addon/src/lib/essentials/package.json",
+            "entryFile": "libs/morajlab/storybook/src/lib/addon/src/lib/essentials/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/morajlab/storybook/src/lib/addon/src/lib/essentials/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/morajlab/storybook/src/lib/addon/src/lib/essentials/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/morajlab/storybook/src/lib/addon/src/lib/essentials"
+          ],
+          "options": {
+            "jestConfig": "libs/morajlab/storybook/src/lib/addon/src/lib/essentials/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

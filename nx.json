@@ -61,6 +61,15 @@
     },
     "formaxui-utils-src-lib-style": {
       "tags": []
+    },
+    "morajlab-storybook": {
+      "tags": []
+    },
+    "morajlab-storybook-src-lib-addon": {
+      "tags": []
+    },
+    "morajlab-storybook-src-lib-addon-src-lib-essentials": {
+      "tags": []
     }
   },
   "targetDependencies": {

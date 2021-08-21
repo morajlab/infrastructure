@@ -42,6 +42,13 @@
       "@formaxui/utils": ["libs/formaxui/utils/src/index.ts"],
       "@formaxui/utils-style": [
         "libs/formaxui/utils/src/lib/style/src/index.ts"
+      ],
+      "@morajlab/storybook": ["libs/morajlab/storybook/src/index.ts"],
+      "@morajlab/storybook-addon": [
+        "libs/morajlab/storybook/src/lib/addon/src/index.ts"
+      ],
+      "@morajlab/storybook-addon-essentials": [
+        "libs/morajlab/storybook/src/lib/addon/src/lib/essentials/src/index.ts"
       ]
     }
   },
