@@ -7,18 +7,35 @@ export default {
   title: 'Components/Acrylic',
 } as Meta;
 
-const backgroundStyle: CSSProperties = {
-  backgroundImage: 'url(https://picsum.photos/800)',
-  width: '800px',
-  height: '400px',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center',
-  backgroundSize: 'cover',
+const Background: FunctionComponent = ({ children }) => {
+  const style: CSSProperties = {
+    backgroundImage: 'url(https://picsum.photos/800)',
+    width: '800px',
+    height: '400px',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  };
+
+  return <div style={style}>{children}</div>;
 };
 
-const Background: FunctionComponent = ({ children }) => (
-  <div style={backgroundStyle}>{children}</div>
-);
+const Content: FunctionComponent = () => {
+  const style: CSSProperties = {
+    color: '#ffffff',
+    textAlign: 'center',
+    padding: '30px',
+  };
+
+  return (
+    <div style={style}>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, totam!
+      Pariatur perspiciatis voluptates doloribus minima ratione, itaque placeat
+      maxime dolores dignissimos corporis laborum dolor tempora enim cum, eaque
+      illo illum.
+    </div>
+  );
+};
 
 const Template: Story<IAcrylicProps> = (args) => (
   <Background>
@@ -29,7 +46,8 @@ const Template: Story<IAcrylicProps> = (args) => (
 export const Primary = Template.bind({});
 
 Primary.args = {
-  children: 'This is for test',
+  children: <Content />,
+  blur: 10,
   style: {
     width: '60%',
     height: '60%',
