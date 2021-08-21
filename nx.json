@@ -47,6 +47,9 @@
     "formaxui-storybook": {
       "tags": []
     },
+    "formaxui-storybook-src-lib-addon": {
+      "tags": []
+    },
     "formaxui-storybook-src-lib-components": {
       "tags": []
     },

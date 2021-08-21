@@ -1,15 +1,19 @@
 {
-  "name": "storybook-addon-kit",
-  "version": "0.0.0",
-  "description": "everything you need to build a Storybook addon",
+  "name": "@formaxui/storybook-addon",
+  "version": "0.0.1",
+  "description": "FormaxUI Storybook addon",
   "keywords": [
     "storybook-addons",
-    "style",
-    "test"
+    "formaxui",
+    "formax",
+    "ui",
+    "storybook",
+    "addon",
+    "typescript"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybookjs/storybook-addon-kit"
+    "url": "https://github.com/formaxui/storybook-formaxui-addon"
   },
   "author": "winkerVSbecks",
   "license": "MIT",
