@@ -47,6 +47,9 @@
       "@morajlab/storybook-addon": [
         "libs/morajlab/storybook/src/lib/addon/src/index.ts"
       ],
+      "@morajlab/storybook-addon-backgrounds": [
+        "libs/morajlab/storybook/src/lib/addon/src/lib/backgrounds/src/index.ts"
+      ],
       "@morajlab/storybook-addon-essentials": [
         "libs/morajlab/storybook/src/lib/addon/src/lib/essentials/src/index.ts"
       ]

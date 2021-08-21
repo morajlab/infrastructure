@@ -825,6 +825,50 @@
         }
       }
     },
+    "morajlab-storybook-src-lib-addon-src-lib-backgrounds": {
+      "root": "libs/morajlab/storybook/src/lib/addon/src/lib/backgrounds",
+      "sourceRoot": "libs/morajlab/storybook/src/lib/addon/src/lib/backgrounds/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/morajlab/storybook/src/lib/addon/src/lib/backgrounds",
+            "tsConfig": "libs/morajlab/storybook/src/lib/addon/src/lib/backgrounds/tsconfig.lib.json",
+            "project": "libs/morajlab/storybook/src/lib/addon/src/lib/backgrounds/package.json",
+            "entryFile": "libs/morajlab/storybook/src/lib/addon/src/lib/backgrounds/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/morajlab/storybook/src/lib/addon/src/lib/backgrounds/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/morajlab/storybook/src/lib/addon/src/lib/backgrounds/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/morajlab/storybook/src/lib/addon/src/lib/backgrounds"
+          ],
+          "options": {
+            "jestConfig": "libs/morajlab/storybook/src/lib/addon/src/lib/backgrounds/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "morajlab-storybook-src-lib-addon-src-lib-essentials": {
       "root": "libs/morajlab/storybook/src/lib/addon/src/lib/essentials",
       "sourceRoot": "libs/morajlab/storybook/src/lib/addon/src/lib/essentials/src",
