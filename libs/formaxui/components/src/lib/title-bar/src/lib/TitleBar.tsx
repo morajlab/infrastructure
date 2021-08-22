@@ -8,7 +8,12 @@ export class TitleBar extends Component<ITitleBarProps> {
   render() {
     const {
       root,
+      title,
       button,
+      acrylic,
+      flexGroup,
+      fullSize,
+      borderRadius,
       closeButton,
       minimizeButton,
       maximizeButton,
@@ -16,12 +21,24 @@ export class TitleBar extends Component<ITitleBarProps> {
     } = Styles({});
 
     return (
-      <div {...root}>
-        <div {...buttonGroup}>
-          <Acrylic />
-          <Button styles={{ ...button, ...closeButton }} />
-          <Button styles={{ ...button, ...minimizeButton }} />
-          <Button styles={{ ...button, ...maximizeButton }} />
+      <div {...root} {...borderRadius}>
+        <Acrylic {...acrylic} {...borderRadius} {...fullSize} />
+        <div {...flexGroup} {...fullSize}>
+          <div {...buttonGroup}>
+            <Button
+              styles={{ ...button, ...closeButton }}
+              onClick={this.props.onClose}
+            />
+            <Button
+              styles={{ ...button, ...minimizeButton }}
+              onClick={this.props.onMinimize}
+            />
+            <Button
+              styles={{ ...button, ...maximizeButton }}
+              onClick={this.props.onMaximize}
+            />
+          </div>
+          <span {...title}>{this.props.title}</span>
         </div>
       </div>
     );
