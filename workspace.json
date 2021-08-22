@@ -733,6 +733,38 @@
         }
       }
     },
+    "formaxui-utils-src-lib-object": {
+      "root": "libs/formaxui/utils/src/lib/object",
+      "sourceRoot": "libs/formaxui/utils/src/lib/object/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/formaxui/utils/src/lib/object/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/formaxui/utils/src/lib/object"],
+          "options": {
+            "jestConfig": "libs/formaxui/utils/src/lib/object/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/formaxui/utils/src/lib/object",
+            "tsConfig": "libs/formaxui/utils/src/lib/object/tsconfig.lib.json",
+            "packageJson": "libs/formaxui/utils/src/lib/object/package.json",
+            "main": "libs/formaxui/utils/src/lib/object/src/index.ts",
+            "assets": ["libs/formaxui/utils/src/lib/object/*.md"]
+          }
+        }
+      }
+    },
     "formaxui-utils-src-lib-style": {
       "root": "libs/formaxui/utils/src/lib/style",
       "sourceRoot": "libs/formaxui/utils/src/lib/style/src",

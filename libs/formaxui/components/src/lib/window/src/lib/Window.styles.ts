@@ -1,21 +1,23 @@
-import { style } from '@formaxui/utils-style';
+import { style, important } from '@formaxui/utils-style';
 import type { IWindowStyleProps } from './Window.types';
 
 // eslint-disable-next-line
 export const Styles = ({}: IWindowStyleProps) => {
   return {
-    root: style({}),
-    titleBar: style({}),
+    root: style({
+      position: 'absolute',
+      inset: 0,
+      display: 'flex',
+      flexDirection: 'column',
+    }),
+    rnd: style({
+      cursor: important(),
+    }),
     iframe: style({
       border: 'none',
       userSelect: 'none',
       WebkitUserDrag: 'none',
-    }),
-    fullSize: style({
-      position: 'absolute',
-      inset: 0,
-      width: '100%',
-      height: '100%',
+      flexGrow: 1,
     }),
   };
 };
