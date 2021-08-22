@@ -49,7 +49,9 @@
     "react-router-dom": "5.2.0",
     "regenerator-runtime": "0.13.7",
     "tslib": "^2.0.0",
-    "util-deprecate": "^1.0.2"
+    "util-deprecate": "^1.0.2",
+    "@diez/engine": "^10.6.0",
+    "@diez/prefabs": "^10.6.0"
   },
   "devDependencies": {
     "@babel/core": "7.12.13",
@@ -82,6 +84,12 @@
     "@types/util-deprecate": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "4.28.5",
     "@typescript-eslint/parser": "4.28.5",
+    "@diez/compiler-core": "^10.6.0",
+    "@diez/extractors": "^10.6.0",
+    "@diez/start": "^10.6.0",
+    "@diez/stdlib": "^10.6.0",
+    "diez": "^10.6.0",
+    "semver": "^6.0.0",
     "babel-jest": "26.2.2",
     "babel-loader": "8.1.0",
     "babel-plugin-module-resolver": "4.0.0",

@@ -497,6 +497,38 @@
         }
       }
     },
+    "formaxui-design-language": {
+      "root": "libs/formaxui/design-language",
+      "sourceRoot": "libs/formaxui/design-language/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/formaxui/design-language/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/formaxui/design-language"],
+          "options": {
+            "jestConfig": "libs/formaxui/design-language/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/formaxui/design-language",
+            "tsConfig": "libs/formaxui/design-language/tsconfig.lib.json",
+            "packageJson": "libs/formaxui/design-language/package.json",
+            "main": "libs/formaxui/design-language/src/index.ts",
+            "assets": ["libs/formaxui/design-language/*.md"]
+          }
+        }
+      }
+    },
     "formaxui-storybook": {
       "root": "libs/formaxui/storybook",
       "sourceRoot": "libs/formaxui/storybook/src",
