@@ -13,7 +13,7 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "target": "es5",
-    "types": ["jest"],
+    "types": ["jest", "node"],
     "lib": ["es2017", "dom"],
     "rootDir": "./src",
     "outDir": "./dist",
@@ -26,6 +26,7 @@
     "src/**/__tests__/**/*",
     "src/**/*.stories.*",
     "src/**/*.mockdata.*",
-    "src/**/__testfixtures__/**"
+    "src/**/__testfixtures__/**",
+    "src/**/*.spec.*"
   ]
 }
