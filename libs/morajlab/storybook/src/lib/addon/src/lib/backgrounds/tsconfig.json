@@ -1,23 +1,31 @@
 {
-  "extends": "../../../../../../../../../tsconfig.base.json",
+  "compileOnSave": false,
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "allowJs": true,
-    "esModuleInterop": true,
+    "baseUrl": ".",
+    "incremental": false,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "jsx": "react",
+    "module": "commonjs",
+    "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "target": "es5",
+    "types": ["jest"],
+    "lib": ["es2017", "dom"],
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "declaration": true
   },
-  "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./tsconfig.lib.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
-    }
+  "include": ["src/**/*"],
+  "exclude": [
+    "src/**/*.test.*",
+    "src/**/tests/**/*",
+    "src/**/__tests__/**/*",
+    "src/**/*.stories.*",
+    "src/**/*.mockdata.*",
+    "src/**/__testfixtures__/**"
   ]
 }

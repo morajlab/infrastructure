@@ -1,13 +1,13 @@
 function config(entry = []) {
   return [
     ...entry,
-    require.resolve('./dist/esm/preset/addDecorator'),
-    require.resolve('./dist/esm/preset/addParameter'),
+    require.resolve('./dist/preset/addDecorator'),
+    require.resolve('./dist/preset/addParameter'),
   ];
 }
 
 function managerEntries(entry = [], options) {
-  return [...entry, require.resolve('./dist/esm/register')];
+  return [...entry, require.resolve('./dist/register')];
 }
 
 module.exports = {
