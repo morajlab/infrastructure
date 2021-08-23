@@ -1,24 +1,10 @@
-import type { IStyleProps } from '@formaxui/types';
+import type { HTMLAttributes } from 'react';
 
-export interface IThemeProps {
-  color?: string;
-  backgroundColor?: string;
-  borderColor?: string;
-  borderRadius?: number;
-}
-
-export interface IStatusProps {
-  default?: IThemeProps;
-  hover?: IThemeProps;
-  active?: IThemeProps;
-}
-
-export interface IButtonProps {
-  theme?: IStatusProps;
-  styles?: IStyleProps;
+export interface IButtonProps extends HTMLAttributes<HTMLDivElement> {
   onClick?: () => void;
+  noStyle?: boolean;
 }
 
 export interface IButtonStyleProps {
-  theme: IButtonProps['theme'];
+  noStyle: IButtonProps['noStyle'];
 }

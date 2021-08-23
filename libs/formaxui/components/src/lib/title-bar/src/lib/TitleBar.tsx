@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Button } from '@formaxui/components-button';
 import { Acrylic } from '@formaxui/components-acrylic';
+import { Text } from '@formaxui/components-text';
 import { Styles } from './TitleBar.styles';
 import type { ITitleBarProps } from './TitleBar.types';
 
@@ -26,19 +27,25 @@ export class TitleBar extends Component<ITitleBarProps> {
         <div {...flexGroup} {...fullSize}>
           <div {...buttonGroup}>
             <Button
-              styles={{ ...button, ...closeButton }}
+              noStyle={true}
               onClick={this.props.onClose}
+              {...button}
+              {...closeButton}
             />
             <Button
-              styles={{ ...button, ...minimizeButton }}
+              noStyle={true}
               onClick={this.props.onMinimize}
+              {...button}
+              {...minimizeButton}
             />
             <Button
-              styles={{ ...button, ...maximizeButton }}
+              noStyle={true}
               onClick={this.props.onMaximize}
+              {...button}
+              {...maximizeButton}
             />
           </div>
-          <span {...title}>{this.props.title}</span>
+          <Text {...title}>{this.props.title}</Text>
         </div>
       </div>
     );

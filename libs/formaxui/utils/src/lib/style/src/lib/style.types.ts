@@ -1,6 +1,9 @@
 import type { CSSProperties } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IStyleProps extends CSSProperties {
+export interface ICSSProps extends CSSProperties {
   [key: string]: any;
+}
+
+export interface IStyleProps extends ICSSProps {
+  [key: string]: ICSSProps | any;
 }

@@ -11,7 +11,7 @@ const defaultProps: Partial<IWindowProps> = {
 
 export class Window extends Component<IWindowProps> {
   render() {
-    const { root, iframe, rnd } = Styles({});
+    const { root, iframe, rnd, borderRadius } = Styles({});
 
     return (
       <Rnd
@@ -19,12 +19,13 @@ export class Window extends Component<IWindowProps> {
         minWidth={this.props?.minWidth ?? defaultProps.minWidth}
         {...rnd}
       >
-        <div {...root}>
+        <div {...root} {...borderRadius}>
           <TitleBar title={this.props.title} />
           <iframe
             src={this.props.url}
             title={this.props.title}
             {...iframe}
+            {...borderRadius}
           ></iframe>
         </div>
       </Rnd>

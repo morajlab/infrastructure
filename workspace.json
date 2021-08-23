@@ -351,6 +351,79 @@
         }
       }
     },
+    "formaxui-components-src-lib-text": {
+      "root": "libs/formaxui/components/src/lib/text",
+      "sourceRoot": "libs/formaxui/components/src/lib/text/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/formaxui/components/src/lib/text",
+            "tsConfig": "libs/formaxui/components/src/lib/text/tsconfig.lib.json",
+            "project": "libs/formaxui/components/src/lib/text/package.json",
+            "entryFile": "libs/formaxui/components/src/lib/text/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/formaxui/components/src/lib/text/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/formaxui/components/src/lib/text/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/formaxui/components/src/lib/text"],
+          "options": {
+            "jestConfig": "libs/formaxui/components/src/lib/text/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/formaxui/components/src/lib/text/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/formaxui-components-src-lib-text",
+            "config": {
+              "configFolder": "libs/formaxui/components/src/lib/text/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
     "formaxui-components-src-lib-title-bar": {
       "root": "libs/formaxui/components/src/lib/title-bar",
       "sourceRoot": "libs/formaxui/components/src/lib/title-bar/src",

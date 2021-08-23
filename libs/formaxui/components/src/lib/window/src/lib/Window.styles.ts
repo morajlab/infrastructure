@@ -14,13 +14,20 @@ export const Styles: IComponentStyleFunction<IWindowStyleProps> = ({}) => {
     rnd: style(
       important({
         cursor: 'default',
+        backgroundColor: 'transparent',
       })
     ),
     iframe: style({
-      border: 'none',
       userSelect: 'none',
       WebkitUserDrag: 'none',
       flexGrow: 1,
+      border: '1px solid #000000',
+      borderTop: 'none',
+      backgroundColor: '#000000',
+    }),
+    borderRadius: style({
+      borderBottomLeftRadius: '5px',
+      borderBottomRightRadius: '5px',
     }),
   };
 };

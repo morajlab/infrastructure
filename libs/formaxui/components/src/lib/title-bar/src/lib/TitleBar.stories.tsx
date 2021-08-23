@@ -32,12 +32,12 @@ export const Primary = Template.bind({});
 Primary.args = {
   title: 'Primary TitleBar',
   onClose: () => {
-    console.log('onClose()');
+    alert('onClose() called !');
   },
   onMaximize: () => {
-    console.log('onMaximize()');
+    alert('onMaximize() called !');
   },
   onMinimize: () => {
-    console.log('onMinimize()');
+    alert('onMinimize() called !');
   },
 };

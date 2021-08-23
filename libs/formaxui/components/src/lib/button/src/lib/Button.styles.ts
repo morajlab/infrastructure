@@ -1,29 +1,38 @@
 import { style } from '@formaxui/utils-style';
+import type { IComponentStyleFunction } from '@formaxui/types';
 import type { IButtonStyleProps } from './Button.types';
 
-export const Styles = ({ theme }: IButtonStyleProps) => {
-  const defaultStatus = theme?.default ?? {
-    color: '#000000',
-    backgroundColor: '#ffffff',
-    borderColor: '#aaaaaa',
-    borderRadius: 5,
-  };
-
+export const Styles: IComponentStyleFunction<IButtonStyleProps> = ({
+  noStyle,
+}) => {
   return {
     root: style({
-      border: `1px solid ${defaultStatus.borderColor}`,
-      backgroundColor: defaultStatus.backgroundColor,
-      borderRadius: defaultStatus.borderRadius,
+      position: 'relative',
+      cursor: 'default',
       display: 'inline-block',
-      padding: '5px 10px',
       userSelect: 'none',
       transition: 'all 0.1s ease-in-out',
-      '&:hover': {
-        ...(theme?.hover ?? {}),
-      },
-      '&:active': {
-        ...(theme?.active ?? {}),
-      },
+      ...(noStyle
+        ? {}
+        : {
+            color: '#ffffff',
+            boxShadow: 'rgba(0,0,0,0.5) 0px 1px',
+            lineHeight: '19px',
+            padding: '5px 10px',
+            width: 'auto',
+            fontSize: '13px',
+            border: `1px solid rgb(0, 112, 243)`,
+            backgroundColor: 'rgb(0, 112, 243)',
+            borderRadius: '5px',
+            minWidth: 'min-content',
+            textAlign: 'center',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            '&:active': {
+              background: 'rgba(0, 112, 243, 0.8)',
+            },
+            '&:hover': {},
+          }),
     }),
   };
 };

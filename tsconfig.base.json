@@ -25,6 +25,9 @@
       "@formaxui/components-rnd": [
         "libs/formaxui/components/src/lib/rnd/src/index.ts"
       ],
+      "@formaxui/components-text": [
+        "libs/formaxui/components/src/lib/text/src/index.ts"
+      ],
       "@formaxui/components-titlebar": [
         "libs/formaxui/components/src/lib/title-bar/src/index.ts"
       ],
