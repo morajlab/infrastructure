@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 import { Rnd } from '@formaxui/components-rnd';
 import { TitleBar } from '@formaxui/components-titlebar';
 import { Styles } from './Window.styles';
