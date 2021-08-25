@@ -22,6 +22,7 @@ export const Styles: IComponentStyleFunction<IPositionStyleProps> = ({
     root: style({
       position: type ?? 'fixed',
       inset: positions[position ?? 'full'],
+      overflow: 'hidden',
     }),
   };
 };

@@ -16,6 +16,7 @@ export const Styles: IComponentStyleFunction<IWallpaperStyleProps> = ({
       backgroundColor: color ?? '#000000',
       userSelect: 'none',
       WebkitUserDrag: 'none',
+      zIndex: -1,
     }),
   };
 };
