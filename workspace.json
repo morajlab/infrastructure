@@ -424,6 +424,79 @@
         }
       }
     },
+    "formaxui-components-src-lib-position": {
+      "root": "libs/formaxui/components/src/lib/position",
+      "sourceRoot": "libs/formaxui/components/src/lib/position/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/formaxui/components/src/lib/position",
+            "tsConfig": "libs/formaxui/components/src/lib/position/tsconfig.lib.json",
+            "project": "libs/formaxui/components/src/lib/position/package.json",
+            "entryFile": "libs/formaxui/components/src/lib/position/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/formaxui/components/src/lib/position/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/formaxui/components/src/lib/position/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/formaxui/components/src/lib/position"],
+          "options": {
+            "jestConfig": "libs/formaxui/components/src/lib/position/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/formaxui/components/src/lib/position/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/formaxui-components-src-lib-position",
+            "config": {
+              "configFolder": "libs/formaxui/components/src/lib/position/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
     "formaxui-components-src-lib-radio": {
       "root": "libs/formaxui/components/src/lib/radio",
       "sourceRoot": "libs/formaxui/components/src/lib/radio/src",
