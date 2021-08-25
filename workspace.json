@@ -278,6 +278,79 @@
         }
       }
     },
+    "formaxui-components-src-lib-checkbox": {
+      "root": "libs/formaxui/components/src/lib/checkbox",
+      "sourceRoot": "libs/formaxui/components/src/lib/checkbox/src",
+      "projectType": "library",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/formaxui/components/src/lib/checkbox",
+            "tsConfig": "libs/formaxui/components/src/lib/checkbox/tsconfig.lib.json",
+            "project": "libs/formaxui/components/src/lib/checkbox/package.json",
+            "entryFile": "libs/formaxui/components/src/lib/checkbox/src/index.ts",
+            "external": ["react/jsx-runtime"],
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "libs/formaxui/components/src/lib/checkbox/README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/formaxui/components/src/lib/checkbox/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/formaxui/components/src/lib/checkbox"],
+          "options": {
+            "jestConfig": "libs/formaxui/components/src/lib/checkbox/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/formaxui/components/src/lib/checkbox/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/formaxui-components-src-lib-checkbox",
+            "config": {
+              "configFolder": "libs/formaxui/components/src/lib/checkbox/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
     "formaxui-components-src-lib-rnd": {
       "root": "libs/formaxui/components/src/lib/rnd",
       "sourceRoot": "libs/formaxui/components/src/lib/rnd/src",
