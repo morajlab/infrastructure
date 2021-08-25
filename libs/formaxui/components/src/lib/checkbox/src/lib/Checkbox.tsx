@@ -17,8 +17,8 @@ export class Checkbox extends Component<ICheckboxProps, ICheckboxStateProps> {
   }
 
   onClickHandler = () => {
-    this.setState((state) => ({
-      checked: !state.checked,
+    this.setState(({ checked }) => ({
+      checked: !checked,
     }));
   };
 

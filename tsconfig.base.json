@@ -25,6 +25,9 @@
       "@formaxui/components-checkbox": [
         "libs/formaxui/components/src/lib/checkbox/src/index.ts"
       ],
+      "@formaxui/components-radio": [
+        "libs/formaxui/components/src/lib/radio/src/index.ts"
+      ],
       "@formaxui/components-rnd": [
         "libs/formaxui/components/src/lib/rnd/src/index.ts"
       ],
