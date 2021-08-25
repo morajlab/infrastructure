@@ -1,4 +1,6 @@
-export interface IWindowProps {
+import type { FMComponentCommonProps } from '@formaxui/types';
+
+export interface IWindowProps extends FMComponentCommonProps {
   title: string;
   url: string;
   minWidth?: number;

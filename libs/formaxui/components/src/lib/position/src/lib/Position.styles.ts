@@ -4,6 +4,7 @@ import type { IPositionStyleProps, PositionsProps } from './Position.types';
 
 export const Styles: IComponentStyleFunction<IPositionStyleProps> = ({
   position,
+  type,
 }) => {
   const positions: PositionsProps = {
     full: '0',
@@ -19,7 +20,7 @@ export const Styles: IComponentStyleFunction<IPositionStyleProps> = ({
 
   return {
     root: style({
-      position: 'fixed',
+      position: type ?? 'fixed',
       inset: positions[position ?? 'full'],
     }),
   };

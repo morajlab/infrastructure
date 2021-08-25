@@ -1,6 +1,6 @@
-import type { HTMLAttributes } from 'react';
+import type { FMComponentCommonProps } from '@formaxui/types';
 
-export interface IPositionProps extends HTMLAttributes<HTMLDivElement> {
+export interface IPositionProps extends FMComponentCommonProps {
   position?:
     | 'full'
     | 'right'
@@ -11,10 +11,12 @@ export interface IPositionProps extends HTMLAttributes<HTMLDivElement> {
     | 'top-left'
     | 'bottom-right'
     | 'bottom-left';
+  type?: 'fixed' | 'absolute';
 }
 
 export interface IPositionStyleProps {
   position: IPositionProps['position'];
+  type: IPositionProps['type'];
 }
 
 export type PositionsProps = {

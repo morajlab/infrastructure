@@ -1,10 +1,10 @@
-import type { HTMLAttributes } from 'react';
+import type { FMComponentCommonProps } from '@formaxui/types';
 
 export interface IRadioStateProps {
   selected: boolean;
 }
 
-export interface IRadioProps extends HTMLAttributes<HTMLDivElement> {
+export interface IRadioProps extends FMComponentCommonProps {
   selected?: IRadioStateProps['selected'];
 }
 

@@ -1,11 +1,10 @@
 import { StrictMode } from 'react';
-import * as ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Desktop } from './app';
 
-import App from './app/app';
-
-ReactDOM.render(
+render(
   <StrictMode>
-    <App />
+    <Desktop />
   </StrictMode>,
   document.getElementById('root')
 );

@@ -8,4 +8,5 @@ export * from '@formaxui/components-radio';
 export * from '@formaxui/components-rnd';
 export * from '@formaxui/components-text';
 export * from '@formaxui/components-titlebar';
+export * from '@formaxui/components-wallpaper';
 export * from '@formaxui/components-window';

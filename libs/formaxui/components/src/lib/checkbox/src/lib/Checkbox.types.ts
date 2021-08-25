@@ -1,10 +1,10 @@
-import type { HTMLAttributes } from 'react';
+import type { FMComponentCommonProps } from '@formaxui/types';
 
 export interface ICheckboxStateProps {
   checked: boolean;
 }
 
-export interface ICheckboxProps extends HTMLAttributes<HTMLDivElement> {
+export interface ICheckboxProps extends FMComponentCommonProps {
   checked?: ICheckboxStateProps['checked'];
 }
 

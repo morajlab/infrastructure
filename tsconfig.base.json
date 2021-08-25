@@ -43,6 +43,9 @@
       "@formaxui/components-titlebar": [
         "libs/formaxui/components/src/lib/title-bar/src/index.ts"
       ],
+      "@formaxui/components-wallpaper": [
+        "libs/formaxui/components/src/lib/wallpaper/src/index.ts"
+      ],
       "@formaxui/components-window": [
         "libs/formaxui/components/src/lib/window/src/index.ts"
       ],

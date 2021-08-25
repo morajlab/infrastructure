@@ -1,4 +1,6 @@
-export interface ITitleBarProps {
+import type { FMComponentCommonProps } from '@formaxui/types';
+
+export interface ITitleBarProps extends FMComponentCommonProps {
   title: string;
   onClose?: () => void;
   onMinimize?: () => void;

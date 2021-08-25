@@ -1,6 +1,6 @@
-import type { HTMLAttributes } from 'react';
+import type { FMComponentCommonProps } from '@formaxui/types';
 
-export interface IAcrylicProps extends HTMLAttributes<HTMLDivElement> {
+export interface IAcrylicProps extends FMComponentCommonProps {
   blur?: number;
 }
 

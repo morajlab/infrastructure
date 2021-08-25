@@ -4,9 +4,10 @@ import type { IPositionProps } from './Position.types';
 
 export const Position: FunctionComponent<IPositionProps> = ({
   position,
+  type,
   ...rest
 }) => {
-  const { root } = Styles({ position });
+  const { root } = Styles({ position, type });
 
   return <div {...root} {...rest} />;
 };
