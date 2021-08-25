@@ -33,6 +33,112 @@
     }
   },
   "projects": {
+    "electron-os-desktop-desktop": {
+      "root": "apps/electron-os/desktop/desktop",
+      "sourceRoot": "apps/electron-os/desktop/desktop/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/electron-os/desktop/desktop",
+            "index": "apps/electron-os/desktop/desktop/src/index.html",
+            "main": "apps/electron-os/desktop/desktop/src/main.tsx",
+            "polyfills": "apps/electron-os/desktop/desktop/src/polyfills.ts",
+            "tsConfig": "apps/electron-os/desktop/desktop/tsconfig.app.json",
+            "assets": [
+              "apps/electron-os/desktop/desktop/src/favicon.ico",
+              "apps/electron-os/desktop/desktop/src/assets"
+            ],
+            "styles": ["apps/electron-os/desktop/desktop/src/styles.css"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/electron-os/desktop/desktop/src/environments/environment.ts",
+                  "with": "apps/electron-os/desktop/desktop/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "electron-os-desktop-desktop:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "electron-os-desktop-desktop:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/electron-os/desktop/desktop/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/electron-os/desktop/desktop"],
+          "options": {
+            "jestConfig": "apps/electron-os/desktop/desktop/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "electron-os-desktop-desktop-e2e": {
+      "root": "apps/electron-os/desktop/desktop-e2e",
+      "sourceRoot": "apps/electron-os/desktop/desktop-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/electron-os/desktop/desktop-e2e/cypress.json",
+            "tsConfig": "apps/electron-os/desktop/desktop-e2e/tsconfig.e2e.json",
+            "devServerTarget": "electron-os-desktop-desktop:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "electron-os-desktop-desktop:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/electron-os/desktop/desktop-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
     "formaxui-components": {
       "root": "libs/formaxui/components",
       "sourceRoot": "libs/formaxui/components/src",
@@ -107,15 +213,15 @@
       }
     },
     "formaxui-components-e2e": {
-      "root": "apps/formaxui-components-e2e",
-      "sourceRoot": "apps/formaxui-components-e2e/src",
+      "root": "apps/formaxui/formaxui-components-e2e",
+      "sourceRoot": "apps/formaxui/formaxui-components-e2e/src",
       "projectType": "application",
       "targets": {
         "e2e": {
           "executor": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/formaxui-components-e2e/cypress.json",
-            "tsConfig": "apps/formaxui-components-e2e/tsconfig.e2e.json",
+            "cypressConfig": "apps/formaxui/formaxui-components-e2e/cypress.json",
+            "tsConfig": "apps/formaxui/formaxui-components-e2e/tsconfig.e2e.json",
             "devServerTarget": "formaxui-components:storybook"
           },
           "configurations": {
@@ -127,7 +233,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/formaxui-components-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/formaxui/formaxui-components-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -1342,5 +1450,6 @@
         }
       }
     }
-  }
+  },
+  "defaultProject": "electron-os-desktop-desktop"
 }
