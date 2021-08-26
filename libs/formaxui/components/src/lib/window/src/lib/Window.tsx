@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Rnd } from '@formaxui/components-rnd';
+import { RnD } from '@formaxui/components-rnd';
 import { TitleBar } from '@formaxui/components-titlebar';
 import { Styles } from './Window.styles';
 import type { IWindowProps } from './Window.types';
@@ -14,7 +14,7 @@ export class Window extends Component<IWindowProps> {
     const { root, iframe, rnd, borderRadius } = Styles({});
 
     return (
-      <Rnd
+      <RnD
         minHeight={this.props?.minHeight ?? defaultProps.minHeight}
         minWidth={this.props?.minWidth ?? defaultProps.minWidth}
         {...rnd}
@@ -28,7 +28,7 @@ export class Window extends Component<IWindowProps> {
             {...borderRadius}
           ></iframe>
         </div>
-      </Rnd>
+      </RnD>
     );
   }
 }
