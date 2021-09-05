@@ -1,5 +1,9 @@
-import { Server } from "./server/server.ts";
+import { Server } from './server/server.ts';
 
 const server = new Server();
 
-server.run();
+server.server.get('/', async (c) => {
+  await c.render('./index.html');
+});
+
+server.start();

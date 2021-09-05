@@ -1,34 +1,30 @@
-import type { IServerProps } from "./server.types.ts";
+import { Application } from 'https://deno.land/x/abc@v1.3.3/mod.ts';
+import { renderFile } from 'https://deno.land/x/abc@v1.3.3/vendor/https/deno.land/x/dejs/mod.ts';
+import { Console } from '../log/log.ts';
+import type { IServerProps } from './server.types.ts';
 
 export class Server {
-  private server;
+  public server;
+  private props: IServerProps;
 
   constructor(props?: IServerProps) {
-    this.server = Deno.listen({ port: props?.port ?? 8080 });
+    this.server = new Application();
 
-    console.log(
-      `HTTP webserver running.  Access it at:  http://localhost:8080/`,
-    );
+    this.server.renderer = {
+      render<T>(name: string, data: T): Promise<Deno.Reader> {
+        return renderFile(name, data);
+      },
+    };
+
+    this.props = {
+      port: props && props?.port ? props.port : 8080,
+    };
   }
 
-  serveHttp = async (conn: Deno.Conn) => {
-    const httpConn = Deno.serveHttp(conn);
+  start = () => {
+    this.server.start({ port: this.props.port as number });
 
-    for await (const requestEvent of httpConn) {
-      const body = "<div>This is for test</div>";
-
-      requestEvent.respondWith(
-        new Response(body, {
-          status: 200,
-        }),
-      );
-    }
-  };
-
-  run = async () => {
-    for await (const conn of this.server) {
-      this.serveHttp(conn);
-    }
+    Console.log(`Server listening on http://localhost:${this.props.port}`);
   };
 }
 
