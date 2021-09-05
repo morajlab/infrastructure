@@ -1,6 +1,6 @@
 import { Application } from 'https://deno.land/x/abc@v1.3.3/mod.ts';
 import { renderFile } from 'https://deno.land/x/abc@v1.3.3/vendor/https/deno.land/x/dejs/mod.ts';
-import { Console } from '../log/log.ts';
+import { Console } from '../index.ts';
 import type { IServerProps } from './server.types.ts';
 
 export class Server {
