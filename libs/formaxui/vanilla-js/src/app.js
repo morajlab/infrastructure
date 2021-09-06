@@ -1,11 +1,17 @@
-import { createElement } from '../libs/utils/index.js';
-import './lib/components/index.js';
+import {
+  createCustomElement,
+  getCustomElementName,
+} from '../libs/utils/utils.js';
+import { Button } from './lib/components/index.js';
 
-export default class App extends HTMLElement {
+export class App extends HTMLElement {
+  static name = 'app-root';
+
   connectedCallback() {
-    this.innerHTML = `<p>This is for test</p>
-    <formax-button-component></formax-button-component>`;
+    this.appendChild(document.createElement(getCustomElementName(Button.name)));
   }
 }
 
-createElement('formax-app-root', App);
+export default App;
+
+createCustomElement(App.name, App);

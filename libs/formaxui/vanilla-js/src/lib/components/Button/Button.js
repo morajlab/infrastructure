@@ -1,9 +1,30 @@
-import { createElement } from '../../../../libs/utils/index.js';
+import {
+  createCustomElement,
+  getCustomElementName,
+} from '../../../../libs/utils/utils.js';
+import { BaseElement } from '../index.js';
 
-export default class Button extends HTMLElement {
+export class Button extends HTMLElement {
+  static name = 'button-component';
+
   connectedCallback() {
-    this.innerHTML = `<button>Example Button</button>`;
+    const baseElement = document.createElement(
+      getCustomElementName(BaseElement.name)
+    );
+    const styles = document.createElement('style');
+
+    baseElement.appendChild(document.createTextNode('Example Button'));
+    styles.appendChild(
+      document.createTextNode(
+        `${getCustomElementName(BaseElement.name)} { color: red; }`
+      )
+    );
+
+    this.appendChild(baseElement);
+    this.appendChild(styles);
   }
 }
 
-createElement('formax-button-component', Button);
+export default Button;
+
+createCustomElement(Button.name, Button);

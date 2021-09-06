@@ -9,20 +9,41 @@ SCRIPTS_DIR_NAME="scripts"
 source "$CURRENT_DIR_PATH/$SCRIPTS_DIR_NAME/binds.sh"
 source "$CURRENT_DIR_PATH/$SCRIPTS_DIR_NAME/commands.sh"
 
-echo "${options_commands[*]}"
-
+# Run argument commands
 check_args() {
   for arg in ${args[*]}; do
-    echo "$arg"
+    case "$arg" in
+      "compile")
+        compile
+      ;;
+      "serve")
+        start_web_server
+      ;;
+      *)
+        echo "ERROR:: Argument '$arg' not found !"
+      ;;
+    esac
   done
 }
 
+# Run option commands
 check_options() {
   for opt in ${options[@]}; do
-    echo ${opt:2}
+    opt=${opt:2}
+
+    case "$opt" in
+      "help")
+        get_help
+      ;;
+      *)
+        echo "ERROR:: Option '$opt' not found !"
+        exit 1
+      ;;
+    esac
   done
 }
 
+# Check input arguments, options and etc.
 check_inputs() {
   args=()
   options=()
@@ -53,7 +74,5 @@ check_inputs() {
 }
 
 check_inputs $@
-
-# c++ webview.cc `pkg-config --cflags --libs gtk+-3.0 webkit2gtk-4.0` -o webview
 
 exit 0
