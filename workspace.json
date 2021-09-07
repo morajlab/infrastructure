@@ -1353,6 +1353,70 @@
         }
       }
     },
+    "morajlab-denod-interface": {
+      "root": "libs/morajlab/denod-interface",
+      "sourceRoot": "libs/morajlab/denod-interface/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/morajlab/denod-interface/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/morajlab/denod-interface"],
+          "options": {
+            "jestConfig": "libs/morajlab/denod-interface/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/morajlab/denod-interface",
+            "tsConfig": "libs/morajlab/denod-interface/tsconfig.lib.json",
+            "packageJson": "libs/morajlab/denod-interface/package.json",
+            "main": "libs/morajlab/denod-interface/src/index.ts",
+            "assets": ["libs/morajlab/denod-interface/*.md"]
+          }
+        }
+      }
+    },
+    "morajlab-google-storage": {
+      "root": "libs/morajlab/google-storage",
+      "sourceRoot": "libs/morajlab/google-storage/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/morajlab/google-storage/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/morajlab/google-storage"],
+          "options": {
+            "jestConfig": "libs/morajlab/google-storage/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/morajlab/google-storage",
+            "tsConfig": "libs/morajlab/google-storage/tsconfig.lib.json",
+            "packageJson": "libs/morajlab/google-storage/package.json",
+            "main": "libs/morajlab/google-storage/src/index.ts",
+            "assets": ["libs/morajlab/google-storage/*.md"]
+          }
+        }
+      }
+    },
     "morajlab-storybook": {
       "root": "libs/morajlab/storybook",
       "sourceRoot": "libs/morajlab/storybook/src",

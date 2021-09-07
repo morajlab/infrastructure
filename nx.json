@@ -93,6 +93,12 @@
     "formaxui-utils-src-lib-style": {
       "tags": []
     },
+    "morajlab-denod-interface": {
+      "tags": []
+    },
+    "morajlab-google-storage": {
+      "tags": []
+    },
     "morajlab-storybook": {
       "tags": []
     },
