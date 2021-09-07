@@ -1,11 +1,27 @@
-export const createCustomElement = (name, component, namespace = 'formax') => {
-  const componentName = `${namespace ? `${namespace}-` : ''}${name}`;
+import { camelToSnakeCase } from './string.js';
 
-  if (!customElements.get(componentName)) {
-    customElements.define(componentName, component);
-  }
+export const fixCustomElementName = (name) => camelToSnakeCase(name);
+
+export const getCustomElementName = (
+  component,
+  name = null,
+  namespace = 'formax'
+) => {
+  const componentName = fixCustomElementName(
+    name && name.length > 0 ? name : component.name
+  );
+
+  return `${namespace ? `${namespace}-` : ''}${componentName}`;
 };
 
-export const getCustomElementName = (name, namespace = 'formax') => {
-  return `${namespace ? `${namespace}-` : ''}${name}`;
+export const createCustomElement = (
+  component,
+  name = null,
+  namespace = 'formax'
+) => {
+  const customElementName = getCustomElementName(component, name, namespace);
+
+  if (!customElements.get(customElementName)) {
+    customElements.define(customElementName, component);
+  }
 };

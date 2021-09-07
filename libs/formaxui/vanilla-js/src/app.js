@@ -2,16 +2,14 @@ import {
   createCustomElement,
   getCustomElementName,
 } from '../libs/utils/utils.js';
-import { Button } from './lib/components/index.js';
+import { Button, BaseElement } from './lib/components/index.js';
 
-export class App extends HTMLElement {
-  static name = 'app-root';
-
+export class App extends BaseElement {
   connectedCallback() {
-    this.appendChild(document.createElement(getCustomElementName(Button.name)));
+    this.appendChild(document.createElement(getCustomElementName(Button)));
   }
 }
 
 export default App;
 
-createCustomElement(App.name, App);
+createCustomElement(App);

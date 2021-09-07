@@ -2,29 +2,25 @@ import {
   createCustomElement,
   getCustomElementName,
 } from '../../../../libs/utils/utils.js';
-import { BaseElement } from '../index.js';
+import { BaseElement, Text } from '../index.js';
 
-export class Button extends HTMLElement {
-  static name = 'button-component';
-
+export class Button extends BaseElement {
   connectedCallback() {
-    const baseElement = document.createElement(
-      getCustomElementName(BaseElement.name)
-    );
     const styles = document.createElement('style');
+    const text = document.createElement(getCustomElementName(Text));
+    text.innerHTML = 'Example Button';
 
-    baseElement.appendChild(document.createTextNode('Example Button'));
     styles.appendChild(
       document.createTextNode(
-        `${getCustomElementName(BaseElement.name)} { color: red; }`
+        `${getCustomElementName(BaseElement)} { color: red; }`
       )
     );
 
-    this.appendChild(baseElement);
+    this.appendChild(text);
     this.appendChild(styles);
   }
 }
 
 export default Button;
 
-createCustomElement(Button.name, Button);
+createCustomElement(Button);
