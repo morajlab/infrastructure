@@ -1,26 +1,27 @@
 import {
   createCustomElement,
-  getCustomElementName,
-} from '../../../../libs/utils/utils.js';
+  registerCustomElement,
+  style,
+} from '../../../../libs/utils/index.js';
+import styles from './Button.styles.js';
 import { BaseElement, Text } from '../index.js';
 
 export class Button extends BaseElement {
+  constructor() {
+    super();
+
+    this.styles = style(styles(), this.constructor);
+  }
+
   connectedCallback() {
-    const styles = document.createElement('style');
-    const text = document.createElement(getCustomElementName(Text));
+    const text = createCustomElement(Text);
     text.innerHTML = 'Example Button';
 
-    styles.appendChild(
-      document.createTextNode(
-        `${getCustomElementName(BaseElement)} { color: red; }`
-      )
-    );
-
     this.appendChild(text);
-    this.appendChild(styles);
+    this.appendChild(this.styles);
   }
 }
 
 export default Button;
 
-createCustomElement(Button);
+registerCustomElement(Button);

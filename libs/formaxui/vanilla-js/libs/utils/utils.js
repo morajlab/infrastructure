@@ -14,7 +14,12 @@ export const getCustomElementName = (
   return `${namespace ? `${namespace}-` : ''}${componentName}`;
 };
 
-export const createCustomElement = (
+export const createCustomElement = (element) =>
+  document.createElement(
+    getCustomElementName(element, typeof element == 'string' ? element : null)
+  );
+
+export const registerCustomElement = (
   component,
   name = null,
   namespace = 'formax'
