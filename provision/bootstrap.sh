@@ -44,25 +44,48 @@ done
 # Hide logs
 exec 3>&1 &>/dev/null
 
-# Log messages
-log_msg() {
-  local type=${2:-"-d"}
-  local reset="\033[0m"
-  local color="\033"
+# Colorize message
+colorize_msg() {
+  local color_name=${2:-"white"}
+  local escape="\033"
+  local reset="[0m"
+  local red="[31m"
+  local green="[32m"
+  local color=""
 
-  case ${type^^} in
-    -E)
-      color="$color[31m"
+  case ${2^^} in
+    RED)
+      color=$red
     ;;
-    -S)
-      color="$color[32m"
+    GREEN)
+      color=$green
     ;;
-    -D)
+    WHITE)
       color=$reset
     ;;
   esac
 
-  echo -e "${color}$1$reset" >&3
+  echo -e "${escape}$color$1${escape}$reset"
+}
+
+# Log messages
+log_msg() {
+  local type=${2:-"-d"}
+  local msg=""
+
+  case ${type^^} in
+    -E)
+      msg=$(colorize_msg "$1" red)
+    ;;
+    -S)
+      msg=$(colorize_msg "$1" green)
+    ;;
+    -D)
+      msg=$(colorize_msg "$1" white)
+    ;;
+  esac
+
+  echo "$msg" >&3
 }
 
 log_error() {
@@ -160,7 +183,7 @@ task_8() {
 }
 
 # Run tasks
-if [ $UPGRADE_SYS_LIBS = 0 ]; then
+if [[ $UPGRADE_SYS_LIBS = 0 ]]; then
   task_1  
 fi
 
