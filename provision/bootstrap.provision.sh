@@ -6,7 +6,7 @@ DENO_INSTALL_URL=""
 WORKSPACE_URL=""
 UPGRADE_SYS_LIBS=0
 
-# Script options
+# Script options and arguments
 NVM_INSTALL_OPTION="--nvm-url"
 DENO_INSTALL_OPTION="--deno-url"
 WORKSPACE_CLONE_OPTION="--workspace-url"

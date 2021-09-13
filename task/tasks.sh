@@ -66,3 +66,10 @@ cat >> ~/.bashrc <<- EOF
 EOF
 fi
 }
+
+# Install shellspec
+install_shellspec() {
+  if [[ $(run_by_ssh "echo $(command -v shellspec &> /dev/null && echo true)") != "true" ]]; then
+    curl -fsSL "$1" | sh -s -- --yes
+  fi
+}
