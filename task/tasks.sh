@@ -18,6 +18,9 @@ install_prerequisites() {
   if [[ $(is_installed unzip) = "false" ]]; then
     sudo apt install unzip -y
   fi
+  if [[ $(is_installed python3-pip) = "false" ]]; then
+    sudo apt install python3-pip -y
+  fi
 }
 
 # Install nvm (nodejs version manager)
@@ -56,15 +59,12 @@ fi
 }
 
 # Clone workspace monorepo
-install_workspace() {
-if [[ $(is_installed mlw) = "false" ]]; then
-git clone "$1" "$HOME/.morajlab" &&
-cat >> ~/.bashrc <<- EOF
-  if ! command -v mlw &> /dev/null; then
-    export PATH="\$HOME/.morajlab/bin:\$PATH"
+clone_workspace() {
+  local path="$HOME/workspace"
+
+  if [ ! -d $path ]; then
+    git clone "$1" $path
   fi
-EOF
-fi
 }
 
 # Install shellspec
@@ -72,4 +72,9 @@ install_shellspec() {
   if [[ $(run_by_ssh "echo $(command -v shellspec &> /dev/null && echo true)") != "true" ]]; then
     curl -fsSL "$1" | sh -s -- --yes
   fi
+}
+
+# Set file watch maximun
+set_file_watch_limit() {
+  echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 }

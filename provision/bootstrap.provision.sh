@@ -69,4 +69,5 @@ run_by_ssh "$(cat <<- SCRIPT
   install_yarn
 SCRIPT
 )"
-install_workspace "$WORKSPACE_URL"
+clone_workspace "$WORKSPACE_URL"
+set_file_watch_limit

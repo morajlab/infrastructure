@@ -47,8 +47,7 @@ Vagrant.configure("2") do |config|
       ${PARAMS=(
         --nvm-url https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
         --deno-url https://deno.land/x/install/install.sh
-        --workspace-url https://github.com/morteza-jamali/file-manager-action.git
-        --no-upgrade
+        --workspace-url https://github.com/morajlab/workspace.git
       )[@]}
     SCRIPT
     sh.env = {
