@@ -1,9 +1,9 @@
-import { css } from "glamor";
-import type { IWindowStyleProps } from "./Window.types";
+import { style } from "~utils";
+import type { WindowStyle } from "./Window.types";
 
-export const Styles = (_props?: IWindowStyleProps) => {
+export const Styles: WindowStyle = () => {
   return {
-    root: css({}),
+    root: style({}),
   };
 };
 

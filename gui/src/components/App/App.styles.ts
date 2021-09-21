@@ -1,9 +1,9 @@
-import { css } from "glamor";
-import type { IAppStyleProps } from "./App.types";
+import { style } from "~utils";
+import type { AppStyle } from "./App.types";
 
-export const Styles = (_props?: IAppStyleProps) => {
+export const Styles: AppStyle = () => {
   return {
-    root: css({}),
+    root: style({}),
   };
 };
 

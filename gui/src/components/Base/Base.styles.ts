@@ -1,9 +1,9 @@
-import { css } from "glamor";
-import type { IBaseStyleProps } from "./Base.types";
+import { style } from "~utils";
+import type { BaseStyle } from "./Base.types";
 
-export const Styles = (_props?: IBaseStyleProps) => {
+export const Styles: BaseStyle = () => {
   return {
-    root: css({}),
+    root: style({}),
   };
 };
 

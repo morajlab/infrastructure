@@ -1,9 +1,11 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { Button } from "framework7-react";
 import { Styles } from "./Window.styles";
-import type { IWindowProps } from "./Window.types";
+import type { WindowComponent } from "./Window.types";
 
-export const Window: FunctionComponent<IWindowProps> = ({}) => {
+export const Window: WindowComponent = ({}) => {
+  const { root } = Styles();
+
   return (
     <>
       <div>

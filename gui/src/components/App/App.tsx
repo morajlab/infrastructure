@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { Base, Window } from "..";
 import { Styles } from "./App.styles";
-import type { IAppProps } from "./App.types";
+import type { AppComponent } from "./App.types";
 
-export const App: FunctionComponent<IAppProps> = () => {
+export const App: AppComponent = () => {
   const { root } = Styles();
 
   return (

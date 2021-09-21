@@ -1,2 +1,7 @@
 export * from "./Window";
-export type { IWindowProps, IWindowStyleProps } from "./Window.types";
+export type {
+  IWindowProps,
+  IWindowStyleProps,
+  WindowComponent,
+  WindowStyle,
+} from "./Window.types";

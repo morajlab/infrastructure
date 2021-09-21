@@ -1,2 +1,7 @@
 export * from "./App";
-export type { IAppProps, IAppStyleProps } from "./App.types";
+export type {
+  IAppProps,
+  IAppStyleProps,
+  AppComponent,
+  AppStyle,
+} from "./App.types";

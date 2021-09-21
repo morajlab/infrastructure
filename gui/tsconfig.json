@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "module": "esnext",
     "target": "es2015",
     "lib": ["es2015", "dom"],
@@ -23,7 +23,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "paths": {
-      "ml-infra-gui/*": ["*"]
+      "~*": ["./src/*"]
     }
   },
   "exclude": ["node_modules", "build", "dist", ".cache", "public"]
