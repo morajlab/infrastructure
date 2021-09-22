@@ -4,7 +4,10 @@ import type {
   IMLStyleFunction,
 } from "~types";
 
-export interface IWindowProps extends IMLComponentProps {}
+export interface IWindowProps extends IMLComponentProps {
+  title: string;
+  url: string;
+}
 
 export interface IWindowStyleProps {}
 

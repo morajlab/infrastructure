@@ -8,7 +8,7 @@ export const App: AppComponent = () => {
 
   return (
     <Base {...root}>
-      <Window />
+      <Window title="Example App" url="https://moraj.ir" />
     </Base>
   );
 };
