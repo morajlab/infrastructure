@@ -1,12 +1,12 @@
 #!/bin/bash
 
-ROOT_DIR_PATH=".."
+ROOT_DIR_PATH="../.."
 
 if [ ! -z "$SYNCED_DIR_DEST" ]; then
   ROOT_DIR_PATH="$SYNCED_DIR_DEST"
 fi
 
-source "$ROOT_DIR_PATH/core/core.sh"
+source "$ROOT_DIR_PATH/provision/core/core.sh"
 
 # Upgrade system libraries
 upgrade_sys_libs() {

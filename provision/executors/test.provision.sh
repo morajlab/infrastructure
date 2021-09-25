@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT_DIR_PATH=".."
+ROOT_DIR_PATH="../.."
 SHELLSPEC_URL=""
 SHELLSPEC_INIT=1
 
@@ -12,7 +12,7 @@ if [ ! -z "$SYNCED_DIR_DEST" ]; then
   ROOT_DIR_PATH="$SYNCED_DIR_DEST"
 fi
 
-source "$ROOT_DIR_PATH/task/tasks.sh"
+source "$ROOT_DIR_PATH/provision/tasks/tasks.sh"
 
 # Check options and arguments
 while [ "$#" -gt 0 ]; do
