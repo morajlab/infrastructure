@@ -1,6 +1,6 @@
 SYNCED_DIR_SOURCE="."
 SYNCED_DIR_DEST="/home/vagrant/.infrastructure"
-PROVISION_DIR="#{SYNCED_DIR_DEST}/provision"
+PROVISION_EXECUTORS_DIR="#{SYNCED_DIR_DEST}/provision/executors"
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/focal64"
@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "pre_test", type: "shell", run: "never" do |sh|
-    sh.inline = "#{PROVISION_DIR}/test.provision.sh $*"
+    sh.inline = "#{PROVISION_EXECUTORS_DIR}/test.provision.sh $*"
     sh.privileged = false
     sh.keep_color = true
     sh.args = <<-SCRIPT
@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "test", type: "shell", run: "never" do |sh|
-    sh.inline = "#{PROVISION_DIR}/test.provision.sh"
+    sh.inline = "#{PROVISION_EXECUTORS_DIR}/test.provision.sh"
     sh.privileged = false
     sh.keep_color = true
     sh.env = {
@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "bootstrap", type: "shell" do |sh|
-    sh.inline = "#{PROVISION_DIR}/bootstrap.provision.sh $*"
+    sh.inline = "#{PROVISION_EXECUTORS_DIR}/bootstrap.provision.sh $*"
     sh.privileged = false
     sh.keep_color = true
     sh.args = <<-SCRIPT
