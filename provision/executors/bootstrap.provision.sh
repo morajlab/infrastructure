@@ -2,12 +2,14 @@
 
 ROOT_DIR_PATH="../.."
 NVM_INSTALL_URL=""
+CODE_SERVER_INSTALL_URL=""
 DENO_INSTALL_URL=""
 WORKSPACE_URL=""
 UPGRADE_SYS_LIBS=0
 
 # Script options and arguments
 NVM_INSTALL_OPTION="--nvm-url"
+CODE_SERVER_INSTALL_OPTION="--code-server-url"
 DENO_INSTALL_OPTION="--deno-url"
 WORKSPACE_CLONE_OPTION="--workspace-url"
 NO_UPGRADE_OPTION="--no-upgrade"
@@ -23,6 +25,11 @@ while [ "$#" -gt 0 ]; do
   case "${1^^}" in
     "${NVM_INSTALL_OPTION^^}")
       NVM_INSTALL_URL="$2"
+      shift
+      shift
+    ;;
+    "${CODE_SERVER_INSTALL_OPTION^^}")
+      CODE_SERVER_INSTALL_URL="$2"
       shift
       shift
     ;;
@@ -49,6 +56,8 @@ done
 # Validate arguments and options
 if [ -z "$NVM_INSTALL_URL" ]; then
   log_error "Option '$NVM_INSTALL_OPTION' is not set !" -e
+elif [ -z "$CODE_SERVER_INSTALL_URL" ]; then
+  log_error "Option '$CODE_SERVER_INSTALL_OPTION' is not set !" -e
 elif [ -z "$DENO_INSTALL_URL" ]; then
   log_error "Option '$DENO_INSTALL_OPTION' is not set !" -e
 elif [ -z "$WORKSPACE_URL" ]; then
@@ -59,6 +68,7 @@ if [[ $UPGRADE_SYS_LIBS = 0 ]]; then
   upgrade_sys_libs
 fi
 
+add_cron_jobs
 install_prerequisites
 install_nvm "$NVM_INSTALL_URL"
 install_deno "$DENO_INSTALL_URL"
@@ -69,5 +79,6 @@ run_by_ssh "$(cat <<- SCRIPT
   install_yarn
 SCRIPT
 )"
+install_code_server "$CODE_SERVER_INSTALL_URL"
 clone_workspace "$WORKSPACE_URL"
 set_file_watch_limit

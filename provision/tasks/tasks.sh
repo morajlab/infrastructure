@@ -13,6 +13,11 @@ upgrade_sys_libs() {
   sudo apt update -y && sudo apt upgrade -y
 }
 
+# Add cron jobs
+add_cron_jobs() {
+  append_unique "export ML_INFRA_ROOT_PATH=$ROOT_DIR_PATH && bash $ROOT_DIR_PATH/provision/executors/cron.provision.sh" ~/.bashrc
+}
+
 # Install prerequisites
 install_prerequisites() {
   if [[ $(is_installed unzip) = "false" ]]; then
@@ -58,6 +63,24 @@ EOF
 fi
 }
 
+# Install vscode server
+install_code_server() {
+  if [[ $(is_installed code-server) = "false" ]]; then
+    ( curl -fsSL "$1" | bash ) &&
+    sudo systemctl enable --now code-server@$USER
+  fi
+}
+
+# Configure code server
+configure_code_server() {
+  local path=~/.config/code-server/config.yaml
+
+  if ! $(string_exist "auth: none" "$path"); then
+    sed -i.bak 's/auth: password/auth: none/' "$path"
+    sudo systemctl restart code-server@$USER
+  fi
+}
+
 # Clone workspace monorepo
 clone_workspace() {
   local path="$HOME/workspace"
@@ -76,5 +99,9 @@ install_shellspec() {
 
 # Set file watch maximun
 set_file_watch_limit() {
-  echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+  local max_user_watches=524288
+
+  if [[ $(sysctl fs.inotify.max_user_watches -n) != "$max_user_watches" ]]; then
+    echo fs.inotify.max_user_watches=$max_user_watches | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+  fi
 }
