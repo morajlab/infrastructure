@@ -16,6 +16,18 @@ eko() {
   fi
 }
 
+# Check string existence in a file
+string_exist() {
+  grep -Fxq "$1" "$2"
+}
+
+# Append string to file if doesn't exist
+append_unique() {
+  if $(run_by_ssh "! grep -Fxq \"$1\" $2"); then
+    echo "$1" >> "$2"
+  fi
+}
+
 # Check library has been installed
 is_installed() {
   if $(run_by_ssh "command -v $1 &> /dev/null"); then
