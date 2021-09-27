@@ -12,6 +12,13 @@
 <img src="https://img.shields.io/badge/vagrant-v2.2.18-blue">
 </div>
 
+[Document](./docs/home.md)
+
+### Tools
+
+- Editors
+  - [code-server](./docs/tools/code-server.md)
+
 ### Jetbrains Space
 
 > Only for members
