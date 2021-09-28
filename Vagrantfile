@@ -56,6 +56,12 @@ Vagrant.configure("2") do |config|
     }
   end
 
+  config.trigger.before :all do |trigger|
+    trigger.info = "Initialize infrastructure"
+    trigger.run = { inline: ".\\scripts\\init.bat" }
+    trigger.ignore = [:destroy, :halt]
+  end
+
   # config.trigger.before [:destroy, :halt] do |trigger|
   #   trigger.name = "VCS trigger"
   #   trigger.info = "Check VCS (version control system) status of workspace"
