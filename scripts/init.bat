@@ -1,8 +1,11 @@
 @echo off
 setlocal
 
-curl https://waterlan.home.xs4all.nl/dos2unix/dos2unix-7.4.2-win64.zip -O
-Call :UnZipFile "F:\infrastructure" "F:\infrastructure\scripts\dos2unix-7.4.2-win64.zip"
+for %%i in ("%~dp0\..") do set "ROOT_DIR=%%~fi"
+
+mkdir "%ROOT_DIR%\tmp" && cd "%ROOT_DIR%\tmp" && curl https://waterlan.home.xs4all.nl/dos2unix/dos2unix-7.4.2-win64.zip -O
+
+Call :UnZipFile "%ROOT_DIR%\tools\dos2unix" "%ROOT_DIR%\tmp\dos2unix-7.4.2-win64.zip"
 exit /b
 
 :UnZipFile <ExtractTo> <newzipfile>
