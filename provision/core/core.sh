@@ -18,7 +18,7 @@ eko() {
 
 # Check string existence in a file
 string_exist() {
-  grep -Fxq "$1" "$2"
+  grep -Fxq "$1" "$2" && echo "true"
 }
 
 # Append string to file if doesn't exist
