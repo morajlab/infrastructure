@@ -1,6 +1,6 @@
 @echo off
 
-set ROOT_DIR=%~dp0\..\
+for %%i in ("%~dp0\..") do set "ROOT_DIR=%%~fi"
 
 for /f "tokens=* delims=" %%a in ('dir "%ROOT_DIR%\provision" /s /b') do (
 "%ROOT_DIR%\tools\dos2unix\bin\dos2unix.exe" %%a

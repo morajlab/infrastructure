@@ -75,7 +75,7 @@ install_code_server() {
 configure_code_server() {
   local path=~/.config/code-server/config.yaml
 
-  if [[ -f "$path" && ! $(string_exist "auth: none" "$path") ]]; then
+  if [[ -f "$path" && $(string_exist "auth: none" "$path") != "true" ]]; then
     sed -i.bak 's/auth: password/auth: none/' "$path"
     sudo systemctl restart code-server@$USER
   fi
