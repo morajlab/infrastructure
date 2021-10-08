@@ -11,7 +11,7 @@ set dos2unixExistence=
 
 rem Start init scripts
 :main
-  call :installDos2Unix
+  call :installDos2Unix && call "%ROOT_DIR%\scripts\burn.bat"
 exit /b 0
 
 rem Install dos2unix tool
