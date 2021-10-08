@@ -56,9 +56,11 @@ Vagrant.configure("2") do |config|
     }
   end
 
-  config.trigger.before [:up, :provision] do |trigger|
-    trigger.info = "Initialize infrastructure"
-    trigger.run = { inline: ".\\scripts\\init.bat" }
+  if Vagrant::Util::Platform.windows? then
+    config.trigger.before [:up, :provision, :reload] do |trigger|
+      trigger.info = "Initialize infrastructure"
+      trigger.run = { inline: ".\\scripts\\init.bat" }
+    end
   end
 
   # config.trigger.before [:destroy, :halt] do |trigger|
