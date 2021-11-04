@@ -82,3 +82,4 @@ SCRIPT
 install_code_server "$CODE_SERVER_INSTALL_URL"
 clone_workspace "$WORKSPACE_URL"
 set_file_watch_limit
+install_windscribe
