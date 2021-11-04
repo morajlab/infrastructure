@@ -45,10 +45,15 @@ install_node() {
 
 # Install yarn
 install_yarn() {
-  if [[ $(is_installed npm) = "true" &&
-    $(is_installed yarn) = "false" ]]; then
-    npm i -g yarn
-  fi
+if [[ $(is_installed npm) = "true" &&
+$(is_installed yarn) = "false" ]]; then
+npm i -g yarn &&
+cat >> ~/.bashrc <<- EOF
+if [[ ! "\$PATH" == *"\$HOME/.yarn/bin"* ]]; then
+  export PATH="\$HOME/.yarn/bin:\$PATH"
+fi
+EOF
+fi
 }
 
 # Install deno
