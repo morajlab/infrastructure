@@ -12,17 +12,19 @@ module VagrantPlugins
         opts = OptionParser.new do |o|
           o.banner = "Usage: vagrant interactive"
           o.separator ""
+
+          o.on("-f", "--force", "Force interactive mode") do |f|
+            options[:force] = f
+          end
         end
 
-        o.on("-f", "--force", "Force interactive mode") do |f|
-          options[:force] = f
-        end
-
+        @logger.debug("run interactive mode...")
+        
         # Parse the options
         argv = parse_options(opts)
         return if !argv
 
-        @logger.debug("run interactive mode...")
+        
         # machines = []
         # with_target_vms(argv) do |machine|
         #   machines << machine

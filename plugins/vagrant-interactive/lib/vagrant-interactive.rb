@@ -7,7 +7,7 @@ module VagrantPlugins
       description "Create interactive terminal prompt for vagrant"
 
       command "interactive" do
-        require File.expand_path("../command", __FILE__)
+        require_relative "vagrant-interactive/command"
         Command
       end
     end
