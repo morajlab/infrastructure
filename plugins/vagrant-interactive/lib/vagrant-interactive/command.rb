@@ -16,15 +16,21 @@ module VagrantPlugins
           o.on("-f", "--force", "Force interactive mode") do |f|
             options[:force] = f
           end
+
+          o.on("-w", "--workspace-url URL", "Workspace url") do |workspace_url|
+            options[:workspace_url] = workspace_url
+          end
         end
 
-        @logger.debug("run interactive mode...")
-        
         # Parse the options
         argv = parse_options(opts)
+
+        print options
+        # @env.ui.info("Workspace url => #{argv}")
+
         return if !argv
 
-        
+
         # machines = []
         # with_target_vms(argv) do |machine|
         #   machines << machine

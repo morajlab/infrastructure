@@ -88,7 +88,4 @@ build-iPhoneSimulator/
 # Support for Project snippet scope
 !.vscode/*.code-snippets
 
-tools/*
-!tools/.gitkeep
-
 # End of https://www.toptal.com/developers/gitignore/api/ruby,vagrant,visualstudiocode

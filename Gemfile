@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
-gem "tty"
+# Specify your gem's dependencies in morajlab.gemspec
+gemspec
