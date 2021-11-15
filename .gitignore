@@ -1,6 +1,14 @@
 # Created by https://www.toptal.com/developers/gitignore/api/ruby,vagrant,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=ruby,vagrant,visualstudiocode
 
+### Bazel ###
+# gitignore template for Bazel build system
+# website: https://bazel.build/
+
+# Ignore all bazel-* symlinks. There is no full list since this can change
+# based on the name of the directory bazel is cloned into.
+/bazel-*
+
 ### Ruby ###
 *.gem
 *.rbc
