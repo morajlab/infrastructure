@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "morajlab/cli"
 require_relative "morajlab/version"
 
 module Morajlab
