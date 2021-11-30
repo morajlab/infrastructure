@@ -91,7 +91,7 @@ clone_workspace() {
   local path="$HOME/workspace"
 
   if [ ! -d $path ]; then
-    git clone "$1" $path
+    git clone "$1" --branch master --single-branch $path
   fi
 }
 
