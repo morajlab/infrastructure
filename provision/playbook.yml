@@ -1,0 +1,34 @@
+---
+- hosts: all
+  tasks:
+    - name: Update and upgrade apt packages
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: yes
+        cache_valid_time: 86400
+      become: yes
+
+    - name: Install prerequisites
+      ansible.builtin.apt:
+        pkg:
+        - unzip
+        - python3-pip
+        state: latest
+      become: yes
+
+    # Install `fnm` (node.js version manager)
+    # - name: Download `fnm` installer script
+    #   ansible.builtin.get_url:
+    #     url: https://fnm.vercel.app/install
+    #     dest: /tmp/fnm-installer.sh
+    #     mode: 0755
+    # - name: Execute `fnm` installer script
+    #   ansible.builtin.shell: /tmp/fnm-installer.sh
+
+    # Install node.js, npm and yarn
+    - name: Install node.js
+      ansible.builtin.shell: '$HOME/.fnm/fnm install --lts'
+    - name: Upgrade npm
+      ansible.builtin.shell: npm i -g npm@latest
+    - name: Install yarn
+      ansible.builtin.shell: npm i -g yarn@latest

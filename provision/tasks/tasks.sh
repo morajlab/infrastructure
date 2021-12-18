@@ -9,9 +9,9 @@ fi
 source "$ROOT_DIR_PATH/provision/core/core.sh"
 
 # Upgrade system libraries
-upgrade_sys_libs() {
-  sudo apt update -y && sudo apt upgrade -y
-}
+# upgrade_sys_libs() {
+#   sudo apt update -y && sudo apt upgrade -y
+# }
 
 # Add cron jobs
 add_cron_jobs() {
@@ -19,29 +19,29 @@ add_cron_jobs() {
 }
 
 # Install prerequisites
-install_prerequisites() {
-  if [[ $(is_installed unzip) = "false" ]]; then
-    sudo apt install unzip -y
-  fi
-  if [[ $(is_installed python3-pip) = "false" ]]; then
-    sudo apt install python3-pip -y
-  fi
-}
+# install_prerequisites() {
+#   if [[ $(is_installed unzip) = "false" ]]; then
+#     sudo apt install unzip -y
+#   fi
+#   if [[ $(is_installed python3-pip) = "false" ]]; then
+#     sudo apt install python3-pip -y
+#   fi
+# }
 
 # Install fnm (nodejs version manager)
-install_fnm() {
-  if [[ $(is_installed fnm) = "false" ]]; then
-    curl -fsSL "$1" | bash
-  fi
-}
+# install_fnm() {
+#   if [[ $(is_installed fnm) = "false" ]]; then
+#     curl -fsSL "$1" | bash
+#   fi
+# }
 
 # Install latest LTS version of nodejs
-install_node() {
-  if [[ $(is_installed fnm) = "true" &&
-    $(is_installed node) = "false" ]]; then
-    fnm install --lts
-  fi
-}
+# install_node() {
+#   if [[ $(is_installed fnm) = "true" &&
+#     $(is_installed node) = "false" ]]; then
+#     fnm install --lts
+#   fi
+# }
 
 # Install yarn
 install_yarn() {
@@ -87,13 +87,13 @@ configure_code_server() {
 }
 
 # Clone workspace monorepo
-clone_workspace() {
-  local path="$HOME/workspace"
+# clone_workspace() {
+#   local path="$HOME/workspace"
 
-  if [ ! -d $path ]; then
-    git clone "$1" --branch master --single-branch $path
-  fi
-}
+#   if [ ! -d $path ]; then
+#     git clone "$1" --branch master --single-branch $path
+#   fi
+# }
 
 # Install shellspec
 install_shellspec() {
