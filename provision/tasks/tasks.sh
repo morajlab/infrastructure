@@ -28,18 +28,18 @@ install_prerequisites() {
   fi
 }
 
-# Install nvm (nodejs version manager)
-install_nvm() {
-  if [[ $(is_installed nvm) = "false" ]]; then
-    curl -o- "$1" | bash
+# Install fnm (nodejs version manager)
+install_fnm() {
+  if [[ $(is_installed fnm) = "false" ]]; then
+    curl -fsSL "$1" | bash
   fi
 }
 
 # Install latest LTS version of nodejs
 install_node() {
-  if [[ $(is_installed nvm) = "true" &&
+  if [[ $(is_installed fnm) = "true" &&
     $(is_installed node) = "false" ]]; then
-    nvm install --lts
+    fnm install --lts
   fi
 }
 

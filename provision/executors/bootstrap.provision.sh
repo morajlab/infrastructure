@@ -1,14 +1,14 @@
 #!/bin/bash
 
 ROOT_DIR_PATH="../.."
-NVM_INSTALL_URL=""
+FNM_INSTALL_URL=""
 CODE_SERVER_INSTALL_URL=""
 DENO_INSTALL_URL=""
 WORKSPACE_URL=""
 UPGRADE_SYS_LIBS=0
 
 # Script options and arguments
-NVM_INSTALL_OPTION="--nvm-url"
+FNM_INSTALL_OPTION="--fnm-url"
 CODE_SERVER_INSTALL_OPTION="--code-server-url"
 DENO_INSTALL_OPTION="--deno-url"
 WORKSPACE_CLONE_OPTION="--workspace-url"
@@ -23,8 +23,8 @@ source "$ROOT_DIR_PATH/provision/tasks/tasks.sh"
 # Check options and arguments
 while [ "$#" -gt 0 ]; do
   case "${1^^}" in
-    "${NVM_INSTALL_OPTION^^}")
-      NVM_INSTALL_URL="$2"
+    "${FNM_INSTALL_OPTION^^}")
+      FNM_INSTALL_URL="$2"
       shift
       shift
     ;;
@@ -54,8 +54,8 @@ while [ "$#" -gt 0 ]; do
 done
 
 # Validate arguments and options
-if [ -z "$NVM_INSTALL_URL" ]; then
-  log_error "Option '$NVM_INSTALL_OPTION' is not set !" -e
+if [ -z "$FNM_INSTALL_URL" ]; then
+  log_error "Option '$FNM_INSTALL_OPTION' is not set !" -e
 elif [ -z "$CODE_SERVER_INSTALL_URL" ]; then
   log_error "Option '$CODE_SERVER_INSTALL_OPTION' is not set !" -e
 elif [ -z "$DENO_INSTALL_URL" ]; then
@@ -70,7 +70,7 @@ fi
 
 add_cron_jobs
 install_prerequisites
-install_nvm "$NVM_INSTALL_URL"
+install_fnm "$FNM_INSTALL_URL"
 install_deno "$DENO_INSTALL_URL"
 run_by_ssh "$(cat <<- SCRIPT
   export SYNCED_DIR_DEST=$ROOT_DIR_PATH &&
