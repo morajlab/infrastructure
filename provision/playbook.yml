@@ -22,3 +22,9 @@
       vars:
         fnm_npm_global_packages:
           - name: yarn
+
+    - name: The upper limit on the number of watches that can be created per real user ID
+      ansible.builtin.include_role:
+        name: gantsign.inotify
+      vars:
+        inotify_max_user_watches: 524288
