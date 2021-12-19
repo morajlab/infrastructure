@@ -1,0 +1,3 @@
+- name: hurricanehrndz.fnm
+  src: https://github.com/hurricanehrndz/ansible-fnm
+  version: master

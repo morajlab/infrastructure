@@ -16,19 +16,9 @@
         state: latest
       become: yes
 
-    # Install `fnm` (node.js version manager)
-    # - name: Download `fnm` installer script
-    #   ansible.builtin.get_url:
-    #     url: https://fnm.vercel.app/install
-    #     dest: /tmp/fnm-installer.sh
-    #     mode: 0755
-    # - name: Execute `fnm` installer script
-    #   ansible.builtin.shell: /tmp/fnm-installer.sh
-
-    # Install node.js, npm and yarn
-    - name: Install node.js
-      ansible.builtin.shell: '$HOME/.fnm/fnm install --lts'
-    - name: Upgrade npm
-      ansible.builtin.shell: npm i -g npm@latest
-    - name: Install yarn
-      ansible.builtin.shell: npm i -g yarn@latest
+    - name: Install `fnm`, `node.js` and `yarn`
+      ansible.builtin.include_role:
+        name: hurricanehrndz.fnm
+      vars:
+        fnm_npm_global_packages:
+          - name: yarn
