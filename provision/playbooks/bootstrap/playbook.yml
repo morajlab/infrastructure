@@ -29,3 +29,8 @@
         name: gantsign.inotify
       vars:
         inotify_max_user_watches: 524288
+
+    - name: Build `mji` cli app
+      ansible.builtin.shell: make virtualenv
+      args:
+        chdir: /vagrant/src/cli

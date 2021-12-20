@@ -1,1 +1,1 @@
-provision:custom = !vagrant ssh -c 'python3 /vagrant/src/cli/cli.py
+provision:custom = !vagrant ssh -c 'source /vagrant/src/cli/env/bin/activate && mji
