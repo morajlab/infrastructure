@@ -1,7 +1,12 @@
+SYNCED_SOURCE_PATH="."
+SYNCED_DEST_PATH="/vagrant"
+PROVISION_PATH="provision"
+
 Vagrant.configure("2") do |config|
-  config.vm.define "morajlab_infra", primary: true do |morajlab_infra|
-    morajlab_infra.vm.box = "ubuntu/impish64"
-    morajlab_infra.vm.synced_folder ".", "/vagrant",
+  config.vm.define "morajlab_infra", primary: true do |mji|
+    mji.vm.box = "ubuntu/impish64"
+
+    mji.vm.synced_folder SYNCED_SOURCE_PATH, SYNCED_DEST_PATH,
       type: "rsync", owner: "vagrant", group: "vagrant",
       rsync__exclude: [".git/", ".vagrant/", "docs"]
   end
@@ -11,8 +16,8 @@ Vagrant.configure("2") do |config|
     vb.memory = "2048"
   end
 
-  config.vm.provision "ansible_local" do |ansible|
-    ansible.galaxy_role_file = "provision/requirements.yml"
-    ansible.playbook = "provision/playbook.yml"
+  config.vm.provision "bootstrap", type: "ansible_local" do |ansible|
+    ansible.galaxy_role_file = "#{PROVISION_PATH}/playbooks/bootstrap/requirements.yml"
+    ansible.playbook = "#{PROVISION_PATH}/playbooks/bootstrap/playbook.yml"
   end
 end

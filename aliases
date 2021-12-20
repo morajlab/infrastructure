@@ -1,0 +1,1 @@
+provision:custom = !vagrant ssh -c 'ansible-playbook /vagrant/provision/playbooks/custom/playbook.yml'

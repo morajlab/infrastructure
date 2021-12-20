@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  vars_prompt:
+    - name: username
+      prompt: What is your username?
+      private: no
+
+  tasks:
+    - name: Say hello
+      ansible.builtin.debug:
+        msg: echo 'Hello Ansible ;]'
