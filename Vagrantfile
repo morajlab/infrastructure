@@ -8,7 +8,10 @@ Vagrant.configure("2") do |config|
 
     mji.vm.synced_folder SYNCED_SOURCE_PATH, SYNCED_DEST_PATH,
       type: "rsync", owner: "vagrant", group: "vagrant",
-      rsync__exclude: [".git/", ".vagrant/", "docs"]
+      rsync__exclude: [".git/", ".vagrant/", "docs", "src"]
+
+    mji.vm.synced_folder "#{SYNCED_SOURCE_PATH}/src", "#{SYNCED_DEST_PATH}/src",
+      owner: "vagrant", group: "vagrant"
   end
 
   config.vm.provider "virtualbox" do |vb|

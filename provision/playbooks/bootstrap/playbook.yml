@@ -13,6 +13,7 @@
         pkg:
         - unzip
         - python3-pip
+        - python3-virtualenv
         state: latest
       become: yes
 
