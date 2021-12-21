@@ -35,7 +35,7 @@ class Base(Controller):
 
 
     @ex(
-        help='example sub command1',
+        help='Provision infrastructure manually',
 
         # sub-command level arguments. ex: 'mji command1 --foo bar'
         arguments=[
@@ -46,8 +46,8 @@ class Base(Controller):
                 'dest' : 'foo' } ),
         ],
     )
-    def command1(self):
-        """Example sub-command."""
+    def provision(self):
+        """Provision infrastructure manually"""
 
         data = {
             'foo' : 'bar',
@@ -58,3 +58,11 @@ class Base(Controller):
             data['foo'] = self.app.pargs.foo
 
         self.app.render(data, 'command1.jinja2')
+
+    @ex(
+        help='Show help'
+    )
+    def help(self):
+        """Show help"""
+
+        self.app.args.print_help()
