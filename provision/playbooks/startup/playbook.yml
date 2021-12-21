@@ -1,0 +1,7 @@
+---
+- hosts: all
+  tasks:
+    - name: Build `mji` cli app
+      ansible.builtin.shell: make virtualenv
+      args:
+        chdir: /vagrant/src/cli

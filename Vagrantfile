@@ -21,6 +21,10 @@ Vagrant.configure("2") do |config|
     vb.memory = "2048"
   end
 
+  config.vm.provision "startup", type: "ansible_local", run: "always" do |ansible|
+    ansible.playbook = "#{PROVISION_PATH}/playbooks/startup/playbook.yml"
+  end
+
   config.vm.provision "bootstrap", type: "ansible_local" do |ansible|
     ansible.galaxy_role_file = "#{PROVISION_PATH}/playbooks/bootstrap/requirements.yml"
     ansible.playbook = "#{PROVISION_PATH}/playbooks/bootstrap/playbook.yml"
