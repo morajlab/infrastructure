@@ -1,1 +1,1 @@
-provision:custom = !vagrant ssh -c 'source /vagrant/src/cli/env/bin/activate && mji
+provision:custom = !vagrant ssh -c '/vagrant/src/cli/mji.sh
