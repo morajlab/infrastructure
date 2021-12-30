@@ -21,6 +21,8 @@
       ansible.builtin.include_role:
         name: hurricanehrndz.fnm
       vars:
+        fnm_nodejs_versions:
+          - v16.13.1
         fnm_npm_global_packages:
           - name: yarn
 
