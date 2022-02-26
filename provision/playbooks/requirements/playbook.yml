@@ -1,0 +1,20 @@
+---
+- hosts: all
+  tasks:
+    - name: Update and upgrade apt packages
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: yes
+        cache_valid_time: 86400
+      become: yes
+
+    - name: Install prerequisites
+      ansible.builtin.apt:
+        pkg:
+        - git
+        - tree
+        - unzip
+        - python3-pip
+        - python3-virtualenv
+        state: latest
+      become: yes
