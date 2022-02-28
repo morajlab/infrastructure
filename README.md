@@ -8,7 +8,7 @@
 <img src="https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen">
 <img src="https://img.shields.io/badge/coverity-passing-brightgreen">
 <img src="https://img.shields.io/badge/status-up-brightgreen">
-<img src="https://img.shields.io/badge/platform-ubuntu--impish--x64-lightgrey">
+<img src="https://img.shields.io/badge/platform-debian--bullseye--x64-lightgrey">
 <img src="https://img.shields.io/badge/vagrant-v2.2.19-blue">
 </div>
 
@@ -18,12 +18,6 @@
 
 - Editors
   - [code-server](./docs/tools/code-server.md)
-
-### Jetbrains Space
-
-> Only for members
-
-[Login](https://morajlab.jetbrains.space)
 
 ### License
 
