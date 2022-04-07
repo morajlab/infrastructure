@@ -1,42 +1,40 @@
-RSYNCED_SOURCE_PATH="."
-RSYNCED_DEST_PATH="/vagrant"
-SYNCED_SOURCE_PATH="shared"
-SYNCED_DEST_PATH="/home/vagrant/shared"
-WORKSPACE_MACHINE_NAME="workspace"
-VCS_MACHINE_NAME="vcs"
+SHARED_SYNC_ROOT="shared"
+LINUX_VM_NAME="linux_workspace"
+WINDOWS_VM_NAME="windows_workspace"
 NAME_PREFIX="mji"
 DEFAULT_RAM=4*1024
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "morajlab/debian-bullseye64"
+  config.vm.synced_folder ".", "/vagrant",
+    type: "rsync", owner: "vagrant", group: "vagrant",
+    rsync__exclude: [".git/", ".vagrant/", "docs", SHARED_SYNC_ROOT],
+    disabled: true
 
-  config.vm.define WORKSPACE_MACHINE_NAME, primary: true do |ws|
-    ws.vm.synced_folder RSYNCED_SOURCE_PATH, RSYNCED_DEST_PATH,
-      type: "rsync", owner: "vagrant", group: "vagrant",
-      rsync__exclude: [".git/", ".vagrant/", "docs", SYNCED_SOURCE_PATH]
-
-    ws.vm.synced_folder "#{SYNCED_SOURCE_PATH}/#{WORKSPACE_MACHINE_NAME}", SYNCED_DEST_PATH,
-      owner: "vagrant", group: "vagrant"
+  config.vm.define LINUX_VM_NAME do |ws|
+    ws.vm.box = "morajlab/debian-bullseye64"
+    ws.vm.synced_folder "#{SHARED_SYNC_ROOT}/#{LINUX_VM_NAME}", "/home/vagrant/shared",
+      owner: "vagrant", group: "vagrant", create: true
 
     ws.vm.provider "virtualbox" do |vb|
-      vb.name = "#{NAME_PREFIX}_#{WORKSPACE_MACHINE_NAME}"
+      vb.name = "#{NAME_PREFIX}_#{LINUX_VM_NAME}"
       vb.gui = false
+      vb.cpus = 2
       vb.memory = DEFAULT_RAM
+      vb.customize ["modifyvm", :id, "--cpuexecutioncap", "100"]
     end
   end
 
-  config.vm.define VCS_MACHINE_NAME do |vcs|
-    vcs.vm.synced_folder RSYNCED_SOURCE_PATH, RSYNCED_DEST_PATH,
-      type: "rsync", owner: "vagrant", group: "vagrant",
-      rsync__exclude: [".git/", ".vagrant/", "docs", SYNCED_SOURCE_PATH]
+  config.vm.define WINDOWS_VM_NAME do |ws|
+    ws.vm.box = "morajlab/windows-11"
+    ws.vm.synced_folder SHARED_SYNC_ROOT, "C:/Users/vagrant/shared",
+      owner: "vagrant", group: "vagrant", create: true
 
-    vcs.vm.synced_folder "#{SYNCED_SOURCE_PATH}/#{VCS_MACHINE_NAME}", SYNCED_DEST_PATH,
-      owner: "vagrant", group: "vagrant"
-
-    vcs.vm.provider "virtualbox" do |vb|
-      vb.name = "#{NAME_PREFIX}_#{VCS_MACHINE_NAME}"
+    ws.vm.provider "virtualbox" do |vb|
+      vb.name = "#{NAME_PREFIX}_#{WINDOWS_VM_NAME}"
       vb.gui = false
+      vb.cpus = 2
       vb.memory = DEFAULT_RAM
+      vb.customize ["modifyvm", :id, "--cpuexecutioncap", "100"]
     end
   end
 end
