@@ -34,7 +34,6 @@ $ mji --help
 $ make test
 ```
 
-
 ### Releasing to PyPi
 
 Before releasing to PyPi, you must configure your login credentials:
