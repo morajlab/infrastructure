@@ -1,0 +1,75 @@
+{
+  "root": "packages/mji/backup/service/service",
+  "sourceRoot": "packages/mji/backup/service/service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/packages/mji/backup/service/service",
+        "index": "packages/mji/backup/service/service/src/index.html",
+        "baseHref": "/",
+        "main": "packages/mji/backup/service/service/src/main.tsx",
+        "polyfills": "packages/mji/backup/service/service/src/polyfills.ts",
+        "tsConfig": "packages/mji/backup/service/service/tsconfig.app.json",
+        "assets": [
+          "packages/mji/backup/service/service/src/favicon.ico",
+          "packages/mji/backup/service/service/src/assets"
+        ],
+        "styles": ["packages/mji/backup/service/service/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "packages/mji/backup/service/service/src/environments/environment.ts",
+              "with": "packages/mji/backup/service/service/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "mji-backup-service-service:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "mji-backup-service-service:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/mji/backup/service/service/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/mji/backup/service/service"],
+      "options": {
+        "jestConfig": "packages/mji/backup/service/service/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

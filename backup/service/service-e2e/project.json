@@ -1,0 +1,30 @@
+{
+  "root": "packages/mji/backup/service/service-e2e",
+  "sourceRoot": "packages/mji/backup/service/service-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "packages/mji/backup/service/service-e2e/cypress.json",
+        "devServerTarget": "mji-backup-service-service:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "mji-backup-service-service:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/mji/backup/service/service-e2e/**/*.{js,ts}"
+        ]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["mji-backup-service-service"]
+}
