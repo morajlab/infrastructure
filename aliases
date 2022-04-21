@@ -1,0 +1,1 @@
+provision:custom = !vagrant ssh -c '/vagrant/src/cli/mji.sh
