@@ -1,0 +1,6 @@
+{
+  "root": "packages/mji",
+  "sourceRoot": "packages/mji/packages",
+  "projectType": "application",
+  "tags": []
+}
