@@ -3,8 +3,10 @@ LINUX_VM_NAME = 'linux_workspace'
 WINDOWS_VM_NAME = 'windows_workspace'
 NAME_PREFIX = 'mji'
 DEFAULT_RAM = 4 * 1024
+TIMEOUT = 5 * 60
 
 Vagrant.configure('2') do |config|
+  config.vm.boot_timeout = TIMEOUT
   config.vm.synced_folder '.',
                           '/vagrant',
                           type: 'rsync',
