@@ -7,11 +7,11 @@
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "packages/mji/backup/service/service-e2e/cypress.json",
-        "devServerTarget": "mji-backup-service-service:serve"
+        "devServerTarget": "mji-packages-backup-service-service:serve"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "mji-backup-service-service:serve:production"
+          "devServerTarget": "mji-packages-backup-service-service:serve:production"
         }
       }
     },
@@ -26,5 +26,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["mji-backup-service-service"]
+  "implicitDependencies": ["mji-packages-backup-service-service"]
 }
