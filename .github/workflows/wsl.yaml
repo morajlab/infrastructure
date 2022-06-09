@@ -1,0 +1,21 @@
+name: Create WSLv1 image
+on:
+  push:
+    branches: ['monorepo']
+
+jobs:
+  create_image:
+    runs-on: windows-latest
+    steps:
+      - uses: Vampire/setup-wsl@v1
+        with:
+          distribution: Ubuntu-20.04
+      - name: Get WSLv1 help
+        shell: pwsh
+        run: |
+          wsl -l --all
+      - name: Export image
+        shell: pwsh
+        run: |
+          wsl --export Ubuntu ubuntu-image
+          ls
