@@ -1,7 +1,24 @@
 {
   "name": "mji",
-  "version": "0.0.110-alpha",
+  "version": "0.0.111-alpha",
   "description": "Moraj Lab vagrant infrastructure",
+  "scripts": {},
+  "private": true,
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "@nrwl/cli": "14.2.4",
+    "@nrwl/js": "14.2.4",
+    "@nrwl/workspace": "14.2.4",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.1",
+    "nx": "14.2.4",
+    "prettier": "^2.6.2",
+    "stylelint": "^14.9.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^26.0.0",
+    "typescript": "~4.7.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/morajlab/mji.git"
@@ -17,6 +34,7 @@
   },
   "homepage": "https://github.com/morajlab/mji#readme",
   "lint-staged": {
-    "**/*": "prettier -w -u"
+    "**/*": "prettier -w -u",
+    "**/*.css": "stylelint"
   }
 }

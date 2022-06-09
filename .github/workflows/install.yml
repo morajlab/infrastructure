@@ -1,0 +1,51 @@
+name: Monorepo CI
+on:
+  push:
+    branches: ['master']
+
+jobs:
+  install_with_npm:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.MORAJLAB_PAT_TOKEN }}
+          submodules: 'recursive'
+      - name: Use Node.js v${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: ./scripts/install.sh --pm npm
+  install_with_yarn:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.MORAJLAB_PAT_TOKEN }}
+          submodules: 'recursive'
+      - name: Use Node.js v${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: ./scripts/install.sh
+  run_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.MORAJLAB_PAT_TOKEN }}
+          submodules: 'recursive'
+      - name: Use Node.js v${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: ./spec/test_install.sh
