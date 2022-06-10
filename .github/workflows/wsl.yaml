@@ -23,3 +23,7 @@ jobs:
         run: |
           pwd
           ls -la
+      - name: Release distro image
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ubuntu-image
