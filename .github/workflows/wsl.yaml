@@ -1,7 +1,9 @@
 name: Create WSLv1 image
+
 on:
   push:
-    branches: ['monorepo']
+    tags:
+      - 'v*.*.*'
 
 jobs:
   create_image:
