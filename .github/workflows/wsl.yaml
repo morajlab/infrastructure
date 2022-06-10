@@ -6,22 +6,20 @@ on:
 jobs:
   create_image:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: wsl-bash {0}
     steps:
       - name: Install Ubuntu-20.04 distro
         uses: Vampire/setup-wsl@v1
         with:
           distribution: Ubuntu-20.04
-      - name: Install Uplink cli
-        shell: pwsh
-        run: |
-          curl -L -o uplink.zip https://github.com/storj/storj/releases/latest/download/uplink_windows_amd64.zip
-          Expand-Archive .\uplink.zip
-          move .\uplink\uplink.exe .
+          wsl-shell-user: mjl
       - name: Export WSL image
         shell: pwsh
         run: |
           wsl --export Ubuntu ubuntu-image
-      - name: Upload image to Storj
-        shell: pwsh
+      - name: Provision distro
         run: |
-          .\uplink.exe --help
+          pwd
+          ls -la
