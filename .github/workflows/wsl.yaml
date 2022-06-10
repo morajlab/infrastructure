@@ -12,20 +12,25 @@ jobs:
       run:
         shell: wsl-bash {0}
     steps:
-      - name: Install Ubuntu-20.04 distro
+      - name: Clone repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.MORAJLAB_MJI_PAT_TOKEN }}
+          submodules: 'recursive'
+      - name: Install distro
         uses: Vampire/setup-wsl@v1
         with:
           distribution: Ubuntu-20.04
           wsl-shell-user: mjl
+          update: 'true'
+      - name: Provision distro
+        run: |
+          ./packages/provision/basic_tools.sh
       - name: Export WSL image
         shell: pwsh
         run: |
-          wsl --export Ubuntu ubuntu-image
-      - name: Provision distro
-        run: |
-          pwd
-          ls -la
+          wsl --export Ubuntu mji-wsl-ubuntu-2004
       - name: Release distro image
         uses: softprops/action-gh-release@v1
         with:
-          files: ubuntu-image
+          files: mji-wsl-ubuntu-2004
