@@ -23,14 +23,28 @@ jobs:
           distribution: Ubuntu-20.04
           wsl-shell-user: mjl
           update: 'true'
+          additional-packages: unzip
+            zip
+            dos2unix
+            tree
+            build-essential
+            openjdk-18-jdk-headless
+            ca-certificates
+            curl
+            gnupg
+            lsb-release
       - name: Provision distro
         run: |
-          ./packages/provision/basic_tools.sh
+          ./packages/provision/scripts/install.sh
+          ./packages/provision/bin/basic_tools.sh
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Export WSL image
         shell: pwsh
         run: |
-          wsl --export Ubuntu mji-wsl-ubuntu-2004
+          wsl --export Ubuntu mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }}
       - name: Release distro image
         uses: softprops/action-gh-release@v1
         with:
-          files: mji-wsl-ubuntu-2004
+          files: mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }}

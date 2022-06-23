@@ -2,33 +2,39 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-sudo apt update -y
-sudo apt upgrade -y
-sudo apt install \
-  unzip \
-  zip \
-  dos2unix \
-  tree \
-  build-essential \
-  openjdk-18-jdk-headless \
-  -y
+shopt -s expand_aliases
+
+PACKAGES_PATH=$(dirname $(realpath $(dirname $0)))/bash_modules
+
+alias is_installed=$PACKAGES_PATH/bin/is_installed
+
+# TODO: Create preseed config
+# sudo apt update -y
+# sudo apt upgrade -y
+# sudo apt install \
+#   unzip \
+#   zip \
+#   dos2unix \
+#   tree \
+#   build-essential \
+#   openjdk-18-jdk-headless \
+#   -y
 
 # sdkman
-if $(command -v sdk &>/dev/null && echo false); then
-  clear
-  echo '============= Install sdkman ==========='
-  #curl -s "https://get.sdkman.io" | bash
-  #source "/home/vagrant/.sdkman/bin/sdkman-init.sh"
+if [[ $(is_installed sdk --alias) = 1 ]]; then
+  curl -s "https://get.sdkman.io" | bash
+  source "/home/vagrant/.sdkman/bin/sdkman-init.sh"
 fi
 
 # docker engine
-if ! command -v docker &>/dev/null; then
-  sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release \
-    -y
+if [[ $(is_installed docker --alias) = 1 ]]; then
+  # TODO: Create preseed config
+  # sudo apt-get install \
+  #   ca-certificates \
+  #   curl \
+  #   gnupg \
+  #   lsb-release \
+  #   -y
   sudo mkdir -p /etc/apt/keyrings
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
   echo \
@@ -44,23 +50,23 @@ if ! command -v docker &>/dev/null; then
 fi
 
 # fnm, nodejs, npm, yarn
-if ! command -v fnm &>/dev/null; then
+if [[ $(is_installed fnm --alias) = 1 ]]; then
   curl -fsSL https://fnm.vercel.app/install | bash
 fi
 
 . ~/.bashrc
 
-if ! command -v node &>/dev/null; then
+if [[ $(is_installed node --alias) = 1 ]]; then
   fnm install --lts
   npm i -g npm@latest
 fi
 
-if ! command -v yarn &>/dev/null; then
+if [[ $(is_installed yarn --alias) = 1 ]]; then
   npm i -g yarn
 fi
 
 # act
-if ! command -v act &>/dev/null; then
+if [[ $(is_installed act --alias) = 1 ]]; then
   curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
   mkdir -p .act/bin
   sudo mv bin/act .act/bin/

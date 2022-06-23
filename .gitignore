@@ -450,3 +450,6 @@ cython_debug/
 # MJI
 shared/**/*
 !shared/.gitkeep
+
+# bpm
+bash_modules/
