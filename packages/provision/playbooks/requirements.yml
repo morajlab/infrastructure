@@ -1,0 +1,7 @@
+- name: hurricanehrndz.fnm
+  src: https://github.com/hurricanehrndz/ansible-fnm
+  version: master
+
+- name: gantsign.inotify
+  src: https://github.com/gantsign/ansible-role-inotify
+  version: master

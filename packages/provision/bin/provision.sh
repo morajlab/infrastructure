@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+ROOT_PATH=$(dirname $(realpath $(dirname $0)))
+
+if [[ $(is_installed ansible --alias) = 1 ]]; then
+    if [[ $(is_installed pip --alias) = 1 ]]; then
+        cd $(mktemp -d)
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        python3 get-pip.py --user
+    fi
+
+    python3 -m pip install --user ansible
+fi
+
+ansible-playbook $ROOT_PATH/playbooks/playbook.yml -K

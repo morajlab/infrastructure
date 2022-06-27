@@ -22,21 +22,11 @@ jobs:
         with:
           distribution: Ubuntu-20.04
           wsl-shell-user: mjl
-          update: 'true'
-          additional-packages: unzip
-            zip
-            dos2unix
-            tree
-            build-essential
-            openjdk-18-jdk-headless
-            ca-certificates
-            curl
-            gnupg
-            lsb-release
+          update: 'false'
       - name: Provision distro
         run: |
           ./packages/provision/scripts/install.sh
-          ./packages/provision/bin/basic_tools.sh
+          ./packages/provision/bin/provision.sh
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
