@@ -4,7 +4,7 @@ shopt -s expand_aliases
 
 PROVISION_PATH=$(dirname $(realpath $(dirname $0)))
 
-alias is_installed=$PROVISION_PATH/bash_modules/bin/is_installed
+alias is_installed="bash $PROVISION_PATH/bash_modules/bin/is_installed"
 
 if [[ $(is_installed ansible --alias) = 1 ]]; then
     if [[ $(is_installed pip --alias) = 1 ]]; then
