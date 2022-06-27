@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        shell: wsl-bash {0}
+        shell: pwsh
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
@@ -34,7 +34,6 @@ jobs:
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Export WSL image
-        shell: pwsh
         run: |
           wsl --export Ubuntu mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }}
       - name: Release distro image
