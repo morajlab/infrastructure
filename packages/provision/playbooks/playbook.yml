@@ -15,7 +15,6 @@
           - dos2unix
           - tree
           - build-essential
-          - openjdk-18-jdk-headless
           - ca-certificates
           - curl
           - gnupg

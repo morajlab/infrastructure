@@ -18,4 +18,4 @@ fi
 
 alias ansible-playbook="$HOME/.local/bin/ansible-playbook"
 
-ansible-playbook $PROVISION_PATH/playbooks/playbook.yml -v
+ansible-playbook -v --connection=local --inventory 127.0.0.1, $PROVISION_PATH/playbooks/playbook.yml
