@@ -17,5 +17,7 @@ if [[ $(is_installed ansible --alias) = 1 ]]; then
 fi
 
 alias ansible-playbook="$HOME/.local/bin/ansible-playbook"
+alias ansible-galaxy="$HOME/.local/bin/ansible-galaxy"
 
+ansible-galaxy install -r $PROVISION_PATH/playbooks/requirements.yml
 ansible-playbook -v --connection=local --inventory 127.0.0.1, $PROVISION_PATH/playbooks/playbook.yml
