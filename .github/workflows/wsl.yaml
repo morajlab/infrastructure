@@ -23,6 +23,8 @@ jobs:
           distribution: Ubuntu-20.04
           wsl-shell-user: mjl
           update: 'false'
+          additional-packages: |
+            unzip
       - name: Provision distro
         run: |
           ./packages/provision/scripts/install.sh
