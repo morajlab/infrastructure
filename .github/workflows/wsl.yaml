@@ -26,6 +26,7 @@ jobs:
           additional-packages: |
             unzip
       - name: Provision distro
+        shell: wsl-bash -u root {0}
         run: |
           ./packages/provision/scripts/install.sh
           ./packages/provision/bin/provision.sh

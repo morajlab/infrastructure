@@ -18,4 +18,4 @@ fi
 
 alias ansible-playbook="$HOME/.local/bin/ansible-playbook"
 
-ansible-playbook $PROVISION_PATH/playbooks/playbook.yml -K -v -e "ansible_become_password=''"
+ansible-playbook $PROVISION_PATH/playbooks/playbook.yml -v
