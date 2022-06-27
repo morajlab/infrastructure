@@ -16,4 +16,6 @@ if [[ $(is_installed ansible --alias) = 1 ]]; then
     python3 -m pip install --user ansible
 fi
 
+alias ansible-playbook="$HOME/.local/bin/ansible-playbook"
+
 ansible-playbook $PROVISION_PATH/playbooks/playbook.yml -K
