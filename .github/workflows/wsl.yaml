@@ -31,8 +31,9 @@ jobs:
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Export WSL image
+        shell: pwsh
         run: |
-          wsl --export Ubuntu mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }}
+          wsl --export Ubuntu mji-wsl-ubuntu-2004
       - name: Release distro image
         shell: pwsh
         run: |
@@ -43,4 +44,4 @@ jobs:
           New-Item .\acc-grant.key
           echo "${{ secrets.MORAJLAB_STORJ_TOKEN }}" > .\acc-grant.key
           echo y|.\uplink.exe access import mji .\acc-grant.key
-          .\uplink.exe cp .\mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }} sj://demo-bucket
+          .\uplink.exe cp .\mji-wsl-ubuntu-2004 sj://demo-bucket
