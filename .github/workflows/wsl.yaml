@@ -29,10 +29,8 @@ jobs:
           ./packages/provision/bin/provision.sh
       - name: Get the version
         id: get_version
-        shell: pwsh
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Export WSL image
-        shell: pwsh
         run: |
           wsl --export Ubuntu mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }}
       - name: Release distro image
@@ -44,5 +42,5 @@ jobs:
           cd .\uplink_windows_amd64\
           New-Item .\acc-grant.key
           echo "${{ secrets.MORAJLAB_STORJ_TOKEN }}" > .\acc-grant.key
-          .\uplink.exe access import mji .\acc-grant.key --interactive=false
+          echo y|.\uplink.exe access import mji .\acc-grant.key
           .\uplink.exe cp .\mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }} sj://demo-bucket
