@@ -10,9 +10,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Get the version
+        uses: olegtarasov/get-tag@v2.1
         id: get_version
-        shell: pwsh
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Install uplink cli
         shell: pwsh
         run: |
@@ -22,7 +21,7 @@ jobs:
           cd .\uplink_windows_amd64\
           New-Item .\acc-grant.key
           echo "${{ secrets.MORAJLAB_STORJ_TOKEN }}" > .\acc-grant.key
-          echo y|.\uplink.exe access import mji .\acc-grant.key
+          echo y|.\uplink.exe access import wsl_images_upload .\acc-grant.key
       - name: Clone repository
         uses: actions/checkout@v3
         with:
@@ -44,8 +43,8 @@ jobs:
       - name: Export WSL image
         shell: pwsh
         run: |
-          wsl --export Ubuntu mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }}
+          wsl --export Ubuntu mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.tag }}
       - name: Release distro image
         shell: pwsh
         run: |
-          pwsh -c "$env:USERPROFILE\uplink_windows_amd64\uplink.exe cp .\mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }} sj://demo-bucket"
+          pwsh -c "$env:USERPROFILE\uplink_windows_amd64\uplink.exe cp .\mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.tag }} sj://wsl-images"
