@@ -8,9 +8,6 @@ on:
 jobs:
   create_image:
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: cmd
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
@@ -32,8 +29,10 @@ jobs:
           ./packages/provision/bin/provision.sh
       - name: Get the version
         id: get_version
+        shell: pwsh
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Export WSL image
+        shell: pwsh
         run: |
           wsl --export Ubuntu mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }}
       - name: Release distro image
