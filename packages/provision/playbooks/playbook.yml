@@ -40,3 +40,10 @@
           - v16.13.1
         fnm_npm_global_packages:
           - name: yarn
+
+    - name: Install SDKMAN
+      include_role:
+        name: gantsign.sdkman
+      vars:
+        sdkman_users:
+          - mjl

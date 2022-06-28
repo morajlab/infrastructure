@@ -5,3 +5,7 @@
 - name: gantsign.inotify
   src: https://github.com/gantsign/ansible-role-inotify
   version: master
+
+- name: gantsign.sdkman
+  src: https://github.com/gantsign/ansible_role_sdkman
+  version: master

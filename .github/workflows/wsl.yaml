@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        shell: pwsh
+        shell: cmd
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
@@ -37,6 +37,13 @@ jobs:
         run: |
           wsl --export Ubuntu mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }}
       - name: Release distro image
-        uses: softprops/action-gh-release@v1
-        with:
-          files: mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }}
+        shell: pwsh
+        run: |
+          cd $env:USERPROFILE
+          curl -#LO https://github.com/storj/storj/releases/latest/download/uplink_windows_amd64.zip
+          Expand-Archive .\uplink_windows_amd64.zip
+          cd .\uplink_windows_amd64\
+          New-Item .\acc-grant.key
+          echo "${{ secrets.MORAJLAB_STORJ_TOKEN }}" > .\acc-grant.key
+          .\uplink.exe access import mji .\acc-grant.key --interactive=false
+          .\uplink.exe cp .\mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.VERSION }} sj://demo-bucket
