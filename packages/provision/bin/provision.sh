@@ -1,23 +1,15 @@
 #!/usr/bin/env bash
 
-shopt -s expand_aliases
-
 PROVISION_PATH=$(dirname $(realpath $(dirname $0)))
+TEMP_PATH=$(mktemp -d)
 
-alias is_installed="bash $(pwd)/bash_modules/bin/is_installed"
+$PROVISION_PATH/scripts/install.sh
 
-if [[ $(is_installed ansible --alias) = 1 ]]; then
-    if [[ $(is_installed pip --alias) = 1 ]]; then
-        cd $(mktemp -d)
-        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-        python3 get-pip.py --user
-    fi
+cp -r $PROVISION_PATH $TEMP_PATH
+chmod 777 $TEMP_PATH/provision/ -R
 
-    python3 -m pip install --user ansible
-fi
+echo -e "toor\ntoor" | passwd
+useradd -m -s /bin/bash -G adm,dialout,cdrom,floppy,sudo,audio,dip,video,plugdev,netdev mjl
+echo -e "mjl\nmjl" | passwd mjl
 
-alias ansible-playbook="$HOME/.local/bin/ansible-playbook"
-alias ansible-galaxy="$HOME/.local/bin/ansible-galaxy"
-
-ansible-galaxy install -r $PROVISION_PATH/playbooks/requirements.yml
-ansible-playbook -v --connection=local --inventory 127.0.0.1, $PROVISION_PATH/playbooks/playbook.yml
+su -c "$TEMP_PATH/provision/bin/ansible.sh" mjl
