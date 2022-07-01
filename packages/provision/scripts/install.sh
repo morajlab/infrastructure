@@ -2,14 +2,25 @@
 
 shopt -s expand_aliases
 
-# Install bpm
-if ! command -v bpm &>/dev/null; then
-  curl -fsSL https://raw.githubusercontent.com/morajlab/bpm/master/packages/install/install.sh | bash
-else
-  echo 'bpm already installed !'
-fi
+BPM_INSTALL_URL=
 
-alias bpm=$HOME/.bpm/bpm
+while [ "$#" -gt 0 ]; do
+    case "${1^^}" in
+        "--BPM-INSTALL-URL" | "-U")
+            BPM_INSTALL_URL=$2
+
+            shift
+            shift
+        ;;
+        *)
+            shift
+        ;;
+    esac
+done
+
+# Install bpm
+curl -fsSL $BPM_INSTALL_URL | bash
 
 # TODO: Add this feature to bpm installer script
-bpm install is_installed
+alias bpm=$HOME/.bpm/bpm
+bpm install is_installed log

@@ -37,8 +37,7 @@ jobs:
       - name: Provision distro
         shell: wsl-bash -u root {0}
         run: |
-          ./packages/provision/scripts/install.sh
-          ./packages/provision/bin/provision.sh
+          ./packages/provision/bin/provision.sh --bpm-install-url ${{ secrets.BPM_INSTALL_URL }}
       - name: Export WSL image
         shell: pwsh
         run: |
