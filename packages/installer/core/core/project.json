@@ -1,0 +1,67 @@
+{
+  "sourceRoot": "packages/installer/core/core/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx-electron:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/installer/core/core",
+        "main": "packages/installer/core/core/src/main.ts",
+        "tsConfig": "packages/installer/core/core/tsconfig.app.json",
+        "assets": ["packages/installer/core/core/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "packages/installer/core/core/src/environments/environment.ts",
+              "with": "packages/installer/core/core/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "nx-electron:execute",
+      "options": {
+        "buildTarget": "installer-core-core:build"
+      }
+    },
+    "package": {
+      "executor": "nx-electron:package",
+      "options": {
+        "name": "installer-core-core",
+        "frontendProject": "installer-ui-ui",
+        "outputPath": "dist/packages",
+        "prepackageOnly": true
+      }
+    },
+    "make": {
+      "executor": "nx-electron:make",
+      "options": {
+        "name": "installer-core-core",
+        "frontendProject": "installer-ui-ui",
+        "outputPath": "dist/executables"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/installer/core/core/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/installer/core/core"],
+      "options": {
+        "jestConfig": "packages/installer/core/core/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -51,7 +51,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "installer-ui-ui:build",
-        "hmr": true
+        "hmr": true,
+        "proxyConfig": "packages/installer/ui/ui/proxy.conf.json"
       },
       "configurations": {
         "development": {

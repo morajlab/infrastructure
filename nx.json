@@ -44,5 +44,8 @@
       }
     }
   },
-  "defaultProject": "installer-ui-ui"
+  "defaultProject": "installer-ui-ui",
+  "cli": {
+    "defaultCollection": "nx-electron"
+  }
 }
