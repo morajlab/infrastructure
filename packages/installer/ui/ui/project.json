@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/installer/ui/ui/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/packages/installer/ui/ui",
+        "index": "packages/installer/ui/ui/src/index.html",
+        "baseHref": "/",
+        "main": "packages/installer/ui/ui/src/main.tsx",
+        "polyfills": "packages/installer/ui/ui/src/polyfills.ts",
+        "tsConfig": "packages/installer/ui/ui/tsconfig.app.json",
+        "assets": [
+          "packages/installer/ui/ui/src/favicon.ico",
+          "packages/installer/ui/ui/src/assets"
+        ],
+        "styles": ["packages/installer/ui/ui/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "packages/installer/ui/ui/src/environments/environment.ts",
+              "with": "packages/installer/ui/ui/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "installer-ui-ui:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "installer-ui-ui:build:development"
+        },
+        "production": {
+          "buildTarget": "installer-ui-ui:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/installer/ui/ui/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/installer/ui/ui"],
+      "options": {
+        "jestConfig": "packages/installer/ui/ui/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

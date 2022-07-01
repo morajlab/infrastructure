@@ -2,7 +2,11 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "mji",
   "affected": {
-    "defaultBase": "main"
+    "defaultBase": "master"
+  },
+  "workspaceLayout": {
+    "appsDir": "packages",
+    "libsDir": "packages"
   },
   "implicitDependencies": {
     "package.json": {
@@ -23,5 +27,22 @@
     "build": {
       "dependsOn": ["^build"]
     }
-  }
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "css",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "installer-ui-ui"
 }

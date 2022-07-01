@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
-  "projects": {}
+  "projects": {
+    "installer-ui-ui": "packages/installer/ui/ui",
+    "installer-ui-ui-e2e": "packages/installer/ui/ui-e2e"
+  }
 }
