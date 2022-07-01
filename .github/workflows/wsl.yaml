@@ -42,8 +42,8 @@ jobs:
       - name: Export WSL image
         shell: pwsh
         run: |
-          wsl --export Ubuntu mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.tag }}
+          wsl --export Ubuntu mji-${{ steps.get_version.outputs.tag }}
       - name: Release distro image
         shell: pwsh
         run: |
-          pwsh -c "$env:USERPROFILE\uplink_windows_amd64\uplink.exe cp .\mji-wsl-ubuntu-2004-${{ steps.get_version.outputs.tag }} sj://wsl-images"
+          pwsh -c "$env:USERPROFILE\uplink_windows_amd64\uplink.exe cp .\mji-${{ steps.get_version.outputs.tag }} sj://wsl-images"
