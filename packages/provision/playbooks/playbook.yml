@@ -19,6 +19,7 @@
           - ca-certificates
           - curl
           - gnupg
+          - gnupg2
           - lsb-release
           - git
           - tree
@@ -48,3 +49,13 @@
       vars:
         sdkman_users:
           - mjl
+
+    - name: Install java
+      shell: sdk install java
+
+    - name: Install rvm
+      include_role:
+        name: rvm.ruby
+      vars:
+        rvm1_rubies:
+          - 'ruby-3.0.0'

@@ -9,3 +9,7 @@
 - name: gantsign.sdkman
   src: https://github.com/gantsign/ansible_role_sdkman
   version: master
+
+- name: rvm.ruby
+  src: https://github.com/rvm/rvm1-ansible
+  version: master
