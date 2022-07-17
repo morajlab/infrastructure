@@ -1,3 +1,3 @@
-[submodule "packages/images"]
-	path = packages/images
-	url = https://github.com/morajlab/images.git
+[submodule "packages/vagrant-images"]
+	path = packages/vagrant-images
+	url = https://github.com/morajlab/vagrant-images.git
