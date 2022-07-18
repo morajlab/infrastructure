@@ -14,7 +14,6 @@
         pkg:
           - zip
           - dos2unix
-          - tree
           - build-essential
           - ca-certificates
           - curl

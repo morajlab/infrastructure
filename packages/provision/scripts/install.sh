@@ -23,4 +23,4 @@ curl -fsSL $BPM_INSTALL_URL | bash
 
 # TODO: Add this feature to bpm installer script
 alias bpm=$HOME/.bpm/bpm
-bpm install is_installed log
+bpm install is_installed log feature_list

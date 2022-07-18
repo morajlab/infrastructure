@@ -12,6 +12,9 @@ jobs:
       - name: Get the version
         uses: olegtarasov/get-tag@v2.1
         id: get_version
+      - name: Authenticate gh cli
+        shell: pwsh
+        run: gh auth login --with-token ${{ secrets.MORAJLAB_MJI_PAT_TOKEN }}
       - name: Install uplink cli
         shell: pwsh
         run: |
