@@ -60,3 +60,4 @@
         rvm1_rubies:
           - 'ruby-3.0.0'
         rvm1_user: 'mjl'
+      ignore_errors: yes
