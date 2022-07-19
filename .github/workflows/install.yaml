@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.MORAJLAB_PAT_TOKEN }}
+          token: ${{ secrets.MORAJLAB_MJI_PAT_TOKEN }}
           submodules: 'recursive'
       - name: Use Node.js v${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.MORAJLAB_PAT_TOKEN }}
+          token: ${{ secrets.MORAJLAB_MJI_PAT_TOKEN }}
           submodules: 'recursive'
       - name: Use Node.js v${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.MORAJLAB_PAT_TOKEN }}
+          token: ${{ secrets.MORAJLAB_MJI_PAT_TOKEN }}
           submodules: 'recursive'
       - name: Use Node.js v${{ matrix.node-version }}
         uses: actions/setup-node@v3
