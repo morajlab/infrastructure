@@ -5,6 +5,9 @@ on:
     tags:
       - 'wsl-*'
 
+env:
+  GH_TOKEN: ${{ secrets.MORAJLAB_MJI_PAT_TOKEN }}
+
 jobs:
   create_image:
     runs-on: windows-latest
@@ -16,7 +19,7 @@ jobs:
         uses: olegtarasov/get-tag@v2.1
         id: get_version
       - name: Authenticate gh cli
-        run: gh auth login --with-token ${{ secrets.MORAJLAB_MJI_PAT_TOKEN }}
+        run: gh auth login
       - name: Install uplink cli
         run: |
           .\scripts\workflow\install_uplink.ps1 `
