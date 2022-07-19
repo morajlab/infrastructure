@@ -3,28 +3,26 @@ name: Create WSLv1 image
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'wsl-*'
 
 jobs:
   create_image:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
     steps:
       - name: Get the version
         uses: olegtarasov/get-tag@v2.1
         id: get_version
       - name: Authenticate gh cli
-        shell: pwsh
         run: gh auth login --with-token ${{ secrets.MORAJLAB_MJI_PAT_TOKEN }}
       - name: Install uplink cli
-        shell: pwsh
         run: |
-          cd $env:USERPROFILE
-          curl -#LO https://github.com/storj/storj/releases/latest/download/uplink_windows_amd64.zip
-          Expand-Archive .\uplink_windows_amd64.zip
-          cd .\uplink_windows_amd64\
-          New-Item .\acc-grant.key
-          echo "${{ secrets.MORAJLAB_STORJ_TOKEN }}" > .\acc-grant.key
-          echo y|.\uplink.exe access import wsl_images_upload .\acc-grant.key
+          .\scripts\workflow\install_uplink.ps1 `
+          -url https://github.com/storj/storj/releases/latest/download/uplink_windows_amd64.zip `
+          -token ${{ secrets.MORAJLAB_STORJ_TOKEN }} `
+          -name mji_wsl_images
       - name: Clone repository
         uses: actions/checkout@v3
         with:
@@ -42,10 +40,26 @@ jobs:
         run: |
           ./packages/provision/bin/provision.sh --bpm-install-url ${{ secrets.BPM_INSTALL_URL }}
       - name: Export WSL image
-        shell: pwsh
         run: |
           wsl --export Ubuntu mji-${{ steps.get_version.outputs.tag }}
-      - name: Release distro image
-        shell: pwsh
+      - name: Upload distro image
         run: |
-          pwsh -c "$env:USERPROFILE\uplink_windows_amd64\uplink.exe cp .\mji-${{ steps.get_version.outputs.tag }} sj://wsl-images"
+          .\scripts\workflow\upload_object.ps1 `
+          -file .\mji-${{ steps.get_version.outputs.tag }} `
+          -bucket wsl-images
+      - name: Get object URL
+        id: image_object_url
+        run: |
+          Write-Output "::set-output name=url::$(`
+          .\scripts\workflow\get_obj_url.ps1 sj://wsl-images/mji-${{ steps.get_version.outputs.tag }}`
+          )"
+      - name: Create 'NOTES.md' file
+        shell: wsl-bash -u mjl {0}
+        run: |
+          ./scripts/workflow/release_notes.sh \
+          -d ./mji-${{ steps.get_version.outputs.tag }} \
+          -u ${{ steps.image_object_url.outputs.url }} > ./NOTES.md
+      - name: Release image
+        run: |
+          .\scripts\workflow\release.ps1 -tag ${{ steps.get_version.outputs.tag }} `
+          -notesfile ./NOTES.md
