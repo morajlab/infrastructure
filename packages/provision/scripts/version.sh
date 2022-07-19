@@ -108,10 +108,11 @@ _sdk() {
 
   while IFS= read -r line; do
     if [[ $continued = 0 ]]; then
+      ((++continued))
       continue
     fi
 
-    cut_d__f_n "echo $line" 2
+    cut_d__f_n "echo $line" 2 | sed 's/[[:cntrl:]]\[0m//'
     break
   done < <(. $HOME/.sdkman/bin/sdkman-init.sh && sdk version)
 }
