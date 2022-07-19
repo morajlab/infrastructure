@@ -51,6 +51,7 @@
 
     - name: Install java
       shell: . ~/.bashrc && sdk install java
+      become: no
 
     - name: Install rvm
       include_role:
