@@ -6,8 +6,8 @@
   src: https://github.com/gantsign/ansible-role-inotify
   version: master
 
-- name: gantsign.sdkman
-  src: https://github.com/gantsign/ansible_role_sdkman
+- name: Comcast.sdkman
+  src: https://github.com/Comcast/ansible-sdkman
   version: master
 
 - name: rvm.ruby

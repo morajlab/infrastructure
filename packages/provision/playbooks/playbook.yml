@@ -44,14 +44,14 @@
 
     - name: Install SDKMAN
       include_role:
-        name: gantsign.sdkman
+        name: Comcast.sdkman
       vars:
-        sdkman_users:
-          - mjl
-
-    - name: Install java
-      shell: . ~/.bashrc && sdk install java
-      become: no
+        sdkman_user: mjl
+        sdkman_group: mjl
+        sdkman_auto_answer: true
+        sdkman_update: true
+        sdkman_install_packages:
+          - { candidate: java, version: 18.0.1.1-open }
 
     - name: Install rvm
       include_role:
