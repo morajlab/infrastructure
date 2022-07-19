@@ -50,7 +50,7 @@
           - mjl
 
     - name: Install java
-      shell: sdk install java
+      shell: . ~/.bashrc && sdk install java
 
     - name: Install rvm
       include_role:
