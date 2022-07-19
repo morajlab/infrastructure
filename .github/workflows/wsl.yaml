@@ -15,17 +15,17 @@ jobs:
       - name: Get the version
         uses: olegtarasov/get-tag@v2.1
         id: get_version
+      - name: Clone repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.MORAJLAB_MJI_PAT_TOKEN }}
+          submodules: 'recursive'
       - name: Install uplink cli
         run: |
           .\scripts\workflow\install_uplink.ps1 `
           -url https://github.com/storj/storj/releases/latest/download/uplink_windows_amd64.zip `
           -token ${{ secrets.MORAJLAB_STORJ_TOKEN }} `
           -name mji_wsl_images
-      - name: Clone repository
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.MORAJLAB_MJI_PAT_TOKEN }}
-          submodules: 'recursive'
       - name: Install distro
         uses: Vampire/setup-wsl@v1
         with:
