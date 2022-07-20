@@ -48,9 +48,9 @@ jobs:
       - name: Get object URL
         id: image_object_url
         run: |
-          Write-Output "::set-output name=url::$(`
-          .\scripts\workflow\get_obj_url.ps1 sj://wsl-images/mji-${{ steps.get_version.outputs.tag }}`
-          )"
+          $url = .\scripts\workflow\get_obj_url.ps1 `
+          sj://wsl-images/mji-${{ steps.get_version.outputs.tag }}
+          Write-Output "::set-output name=url::$url"
       - name: Create 'NOTES.md' file
         shell: wsl-bash -u mjl {0}
         run: |
