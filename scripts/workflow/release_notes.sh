@@ -8,7 +8,7 @@ download_file_url=
 version_array=()
 software_list=
 
-alias feature_list="bash $ROOT_PATH/packages/provision/bash_modules/bin/feature_list"
+alias feature_list="bash $(pwd)/bash_modules/bin/feature_list"
 
 while [ "$#" -gt 0 ]; do
   case "${1^^}" in
