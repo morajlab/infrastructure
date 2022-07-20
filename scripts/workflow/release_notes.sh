@@ -2,7 +2,7 @@
 
 shopt -s expand_aliases
 
-ROOT_PATH=$(dirname $(realpath $(dirname $0)))
+ROOT_PATH=$(dirname $(dirname $(realpath $(dirname $0))))
 download_file_path=
 download_file_url=
 version_array=()
