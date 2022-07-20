@@ -9,7 +9,3 @@
 - name: Comcast.sdkman
   src: https://github.com/Comcast/ansible-sdkman
   version: master
-
-- name: rvm.ruby
-  src: https://github.com/rvm/rvm1-ansible
-  version: master

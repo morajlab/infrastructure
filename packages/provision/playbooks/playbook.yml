@@ -52,11 +52,3 @@
         sdkman_update: true
         sdkman_install_packages:
           - { candidate: java, version: 18.0.1.1-open }
-
-    - name: Install rvm
-      include_role:
-        name: rvm.ruby
-      vars:
-        rvm1_rubies:
-          - 'ruby-2.7.2'
-        rvm1_user: 'mjl'

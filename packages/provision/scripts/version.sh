@@ -123,7 +123,3 @@ _java() {
     break
   done < <(java --version)
 }
-
-_rvm() {
-  cut_d__f_n 'rvm --version' 2
-}
