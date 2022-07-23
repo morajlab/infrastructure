@@ -49,6 +49,7 @@ git submodule update --init --recursive && \
 git submodule foreach --recursive 'git checkout -b submodules | echo -n' && \
 $installation_script && \
 $install_husky && \
+gem install bundler prettier_print syntax_tree syntax_tree-haml syntax_tree-rbs && \
 git submodule foreach --recursive $install_husky
 
 # [[ $? = 0 ]] && log success "Workspace installed successfully"
