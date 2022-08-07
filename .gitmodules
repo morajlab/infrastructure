@@ -1,3 +1,6 @@
 [submodule "packages/vagrant-images"]
 	path = packages/vagrant-images
 	url = https://github.com/morajlab/vagrant-images.git
+[submodule "packages/textual"]
+	path = packages/textual
+	url = https://github.com/morajlab/textual.git
