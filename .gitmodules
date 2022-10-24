@@ -4,3 +4,6 @@
 [submodule "packages/textual"]
 	path = packages/textual
 	url = https://github.com/morajlab/textual.git
+[submodule "packages/vagrant-cli"]
+	path = packages/vagrant-cli
+	url = https://github.com/morajlab/vagrant-cli.git
