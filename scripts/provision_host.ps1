@@ -1,7 +1,12 @@
+# TODO: Create powershell common arguments
+
 # TODO: Complete the list of providers
 $PROVIDERS_LIST = @{
     VIRTUALBOX = "virtualbox";
 };
+
+$root_path = "C:\Vagrant-Workspaces"; # Get system drive name
+$default_provider = $PROVIDERS_LIST.VIRTUALBOX;
 
 function Test-RootPath {
     return $true;
@@ -29,10 +34,10 @@ function Test-Arguments {
     param (
         [ValidateNotNullOrEmpty()]
         [string]
-        $RootPath = "C:\Vagrant-Workspaces", # Get system drive name
+        $RootPath = $root_path,
         [ValidateNotNullOrEmpty()]
         [string]
-        $DefaultProvider = $PROVIDERS_LIST.VIRTUALBOX
+        $DefaultProvider = $default_provider
     )
 
     if (-Not (Test-DefaultProvider -DefaultProvider $DefaultProvider)) {
@@ -51,9 +56,23 @@ function Test-Arguments {
     }
     
     # if (-Not (Test-RootPath)) {}
+
+    $script:root_path = $RootPath;
+    $script:default_provider = $DefaultProvider;
 }
 
 Test-Arguments @args
+
+function Get-VagrantPath {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $false)]
+        [string] # TODO: Create argument with multiple type (string, string[])
+        $Path
+    )
+    
+    return Join-Path $root_path $Path;
+}
 
 function Set-EnvironmentVariables {
     [CmdletBinding()]
@@ -69,11 +88,13 @@ function Set-EnvironmentVariables {
     }
 }
 
-# $envariables = @{
-#     VAGRANT_HOME                   = Join-Path $RootPath ".vagrant.d"
-#     VAGRANT_VAGRANTFILE            = "Vagrantfile.rb"
-#     VAGRANT_DEFAULT_PROVIDER       = "virtualbox"
-#     VAGRANT_VMWARE_CLONE_DIRECTORY = Join-Path $RootPath "virtual-machines\vmware"
-# };
+$envariables = @{
+    VAGRANT_HOME                   = Get-VagrantPath -Path ".vagrant.d"
+    VAGRANT_VAGRANTFILE            = "Vagrantfile.rb"
+    VAGRANT_DEFAULT_PROVIDER       = $default_provider
+    # TODO: Use path array:
+    # VAGRANT_VMWARE_CLONE_DIRECTORY = Get-VagrantPath -Path "virtual-machines", "vmware"
+    VAGRANT_VMWARE_CLONE_DIRECTORY = Get-VagrantPath -Path "virtual-machines\vmware"
+};
 
-# Set-EnvironmentVariables -Variables $envariables -Debug:$debug
+Set-EnvironmentVariables -Variables $envariables -Debug
