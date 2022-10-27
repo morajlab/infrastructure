@@ -3,8 +3,10 @@
 # TODO: Complete the list of providers
 $PROVIDERS_LIST = @{
     VIRTUALBOX = "virtualbox";
+    VMWARE     = "vmware_desktop";
+    DOCKER     = "docker";
+    HYPERV     = "hyperv";
 };
-
 $root_path = "C:\Vagrant-Workspaces"; # Get system drive name
 $default_provider = $PROVIDERS_LIST.VIRTUALBOX;
 
@@ -63,6 +65,20 @@ function Test-Arguments {
 
 Test-Arguments @args
 
+filter Invoke-ArrayToHashtable {
+    begin {
+        $hashtable = @{};
+        $counter = 0;
+    }
+    process {
+        $hashtable[$_] = $counter;
+        ++$counter;
+    }
+    end {
+        return $hashtable;
+    }
+}
+
 function Get-VagrantPath {
     [CmdletBinding()]
     param (
@@ -88,6 +104,29 @@ function Set-EnvironmentVariables {
     }
 }
 
+function Install-VagrantPlugins {
+    $PLUGINS = @(
+        "vagrant-vmware-desktop",
+        "vagrant-disksize"
+    ) | Invoke-ArrayToHashtable;
+
+    vagrant plugin list | ForEach-Object {
+        if ($_.ToString() -like "*No plugins installed*") {
+            return;
+        }
+
+        $PLUGINS.Remove($_.Split(" ")[0]);
+    }
+
+    if ($PLUGINS.Count -eq 0) {
+        return;
+    }
+
+    $PLUGINS.Keys | ForEach-Object {
+        vagrant plugin install $_
+    }
+}
+
 $envariables = @{
     VAGRANT_HOME                   = Get-VagrantPath -Path ".vagrant.d"
     VAGRANT_VAGRANTFILE            = "Vagrantfile.rb"
@@ -97,4 +136,5 @@ $envariables = @{
     VAGRANT_VMWARE_CLONE_DIRECTORY = Get-VagrantPath -Path "virtual-machines\vmware"
 };
 
-Set-EnvironmentVariables -Variables $envariables -Debug
+Set-EnvironmentVariables -Variables $envariables
+Install-VagrantPlugins
