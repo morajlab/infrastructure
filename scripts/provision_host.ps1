@@ -1,69 +1,27 @@
-# TODO: Create powershell common arguments
+[CmdletBinding()]
+param (
+    [Parameter(HelpMessage = "Path to Vagrant workspaces root")]
+    [ValidateNotNullOrEmpty()]
+    [ValidateScript(
+        {
+            Test-Path $_;
+        }, 
+        ErrorMessage = "Path '{0}' is invalid."
+    )]
+    [string]
+    $RootPath = (Join-Path $env:SystemDrive "Vagrant-Workspaces"),
+    [Parameter(HelpMessage = "Default Vagrant provider")]
+    [ValidateSet("VIRTUALBOX", "VMWARE", "DOCKER", "HYPERV")]
+    [string]
+    $DefaultProvider = "VIRTUALBOX"
+)
 
-# TODO: Complete the list of providers
 $PROVIDERS_LIST = @{
     VIRTUALBOX = "virtualbox";
     VMWARE     = "vmware_desktop";
     DOCKER     = "docker";
     HYPERV     = "hyperv";
 };
-$root_path = "C:\Vagrant-Workspaces"; # Get system drive name
-$default_provider = $PROVIDERS_LIST.VIRTUALBOX;
-
-function Test-RootPath {
-    return $true;
-}
-
-function Test-DefaultProvider {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory = $true)]
-        [string]
-        $DefaultProvider
-    )
-
-    $PROVIDERS_LIST.Values | ForEach-Object {
-        if ($DefaultProvider -ceq $_) {
-            return $true;            
-        }
-    }
-
-    return $false;
-}
-
-function Test-Arguments {
-    [CmdletBinding()]
-    param (
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $RootPath = $root_path,
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $DefaultProvider = $default_provider
-    )
-
-    if (-Not (Test-DefaultProvider -DefaultProvider $DefaultProvider)) {
-        $exception = [System.Exception]@{
-            Source   = "provision_host.ps1";
-            HelpLink = "https://developer.hashicorp.com/vagrant/docs/providers"
-        };
-
-        Write-Error `
-            -Message "Invalid value" `
-            -Category InvalidArgument `
-            -TargetObject $DefaultProvider `
-            -Exception $exception;
-    
-        Exit 1;
-    }
-    
-    # if (-Not (Test-RootPath)) {}
-
-    $script:root_path = $RootPath;
-    $script:default_provider = $DefaultProvider;
-}
-
-Test-Arguments @args
 
 filter Invoke-ArrayToHashtable {
     begin {
@@ -83,11 +41,19 @@ function Get-VagrantPath {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $false)]
-        [string] # TODO: Create argument with multiple type (string, string[])
+        [string[]]
         $Path
     )
-    
-    return Join-Path $root_path $Path;
+
+    $result = $RootPath;
+
+    if ($Path.Length -gt 0) {
+        $Path | ForEach-Object {
+            $result = Join-Path -Path $result -ChildPath $_;
+        }
+    }
+
+    return $result;
 }
 
 function Set-EnvironmentVariables {
@@ -130,10 +96,8 @@ function Install-VagrantPlugins {
 $envariables = @{
     VAGRANT_HOME                   = Get-VagrantPath -Path ".vagrant.d"
     VAGRANT_VAGRANTFILE            = "Vagrantfile.rb"
-    VAGRANT_DEFAULT_PROVIDER       = $default_provider
-    # TODO: Use path array:
-    # VAGRANT_VMWARE_CLONE_DIRECTORY = Get-VagrantPath -Path "virtual-machines", "vmware"
-    VAGRANT_VMWARE_CLONE_DIRECTORY = Get-VagrantPath -Path "virtual-machines\vmware"
+    VAGRANT_DEFAULT_PROVIDER       = $PROVIDERS_LIST[$DefaultProvider]
+    VAGRANT_VMWARE_CLONE_DIRECTORY = Get-VagrantPath -Path "virtual-machines", "vmware"
 };
 
 Set-EnvironmentVariables -Variables $envariables
