@@ -1,9 +1,9 @@
-[submodule "packages/vagrant-images"]
-	path = packages/vagrant-images
-	url = https://github.com/morajlab/vagrant-images.git
 [submodule "packages/textual"]
 	path = packages/textual
 	url = https://github.com/morajlab/textual.git
-[submodule "packages/vagrant-cli"]
-	path = packages/vagrant-cli
-	url = https://github.com/morajlab/vagrant-cli.git
+[submodule "packages/wsl-images"]
+	path = packages/wsl-images
+	url = https://github.com/morajlab/mji-wsl-images.git
+[submodule "packages/vagrant-images"]
+	path = packages/vagrant-images
+	url = https://github.com/morajlab/mji-vagrant-images.git
