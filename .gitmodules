@@ -7,3 +7,6 @@
 [submodule "packages/vagrant-images"]
 	path = packages/vagrant-images
 	url = https://github.com/morajlab/mji-vagrant-images.git
+[submodule "packages/desktop-app"]
+	path = packages/desktop-app
+	url = https://github.com/morajlab/mji-desktop-app.git
