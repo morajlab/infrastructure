@@ -1,0 +1,3 @@
+- name: gantsign.inotify
+  src: https://github.com/gantsign/ansible-role-inotify
+  version: master

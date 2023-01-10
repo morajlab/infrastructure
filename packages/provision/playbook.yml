@@ -1,0 +1,33 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
+        update_cache: yes
+        upgrade: yes
+        cache_valid_time: 86400
+
+    - name: Install prerequisites
+      apt:
+        pkg:
+          - zip
+          - dos2unix
+          - build-essential
+          - ca-certificates
+          - curl
+          - gnupg
+          - gnupg2
+          - lsb-release
+          - git
+          - tree
+          - unzip
+          - python3-pip
+          - python3-virtualenv
+        state: latest
+
+    - name: The upper limit on the number of watches that can be created per real user ID
+      include_role:
+        name: gantsign.inotify
+      vars:
+        inotify_max_user_watches: 524288

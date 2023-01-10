@@ -9,24 +9,24 @@ Vagrant.configure("2") do |config|
   config.vm.boot_timeout = TIMEOUT
   config.vm.synced_folder ".",
                           "/vagrant",
-                          type: "rsync",
-                          owner: "vagrant",
-                          group: "vagrant",
-                          rsync__exclude: [
-                            ".git/",
-                            ".vagrant/",
-                            "docs",
-                            SHARED_SYNC_ROOT
-                          ],
                           disabled: true
 
   config.vm.define LINUX_VM_NAME do |ws|
-    ws.vm.box = "morajlab/debian-bullseye64"
+    ws.vm.box = "ubuntu/kinetic64"
+    ws.vm.synced_folder "packages/provision", "/vagrant"
     ws.vm.synced_folder "#{SHARED_SYNC_ROOT}/#{LINUX_VM_NAME}",
                         "/home/vagrant/shared",
                         owner: "vagrant",
                         group: "vagrant",
                         create: true
+
+    ws.vm.provision "ansible_local" do |ansible|
+      ansible.become = true
+      ansible.galaxy_roles_path = "/etc/ansible/roles"
+      ansible.galaxy_role_file = "requirements.yml"
+      ansible.galaxy_command = "sudo ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force"
+      ansible.playbook = "playbook.yml"
+    end
 
     ws.vm.provider "virtualbox" do |vb|
       vb.name = "#{NAME_PREFIX}_#{LINUX_VM_NAME}"
