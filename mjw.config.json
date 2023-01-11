@@ -1,0 +1,28 @@
+{
+  "git": {
+    "submodules": {
+      "modules": [
+        {
+          "path": "vagrant-images",
+          "url": "https://github.com/morajlab/mji-vagrant-images.git"
+        },
+        {
+          "path": "desktop-app",
+          "url": "https://github.com/morajlab/mji-desktop-app.git"
+        },
+        {
+          "path": "wsl-images",
+          "url": "https://github.com/morajlab/mji-wsl-images.git"
+        },
+        {
+          "url": "https://github.com/morajlab/textual.git",
+          "branch": "mjl_submodules"
+        }
+      ],
+      "options": {
+        "default_branch": "submodules",
+        "root_path": "packages"
+      }
+    }
+  }
+}
