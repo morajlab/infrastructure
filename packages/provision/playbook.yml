@@ -31,3 +31,42 @@
         name: gantsign.inotify
       vars:
         inotify_max_user_watches: 524288
+
+    - name: Install KVM
+      include_role:
+        name: mrlesmithjr.kvm
+
+    - name: Initialize LXD
+      ansible.builtin.shell:
+        cmd: lxd init --minimal
+
+    - name: Create a LXD profile
+      community.general.lxd_profile:
+        name: mji
+        description: MJI containers profile
+        state: present
+        config:
+          limits.cpu: "1"
+          limits.memory: "2GB"
+        devices:
+          root:
+            path: /
+            pool: default
+            size: 20GB
+            type: disk
+
+    - name: Create slave vm
+      community.general.lxd_container:
+        name: slave-vm
+        type: virtual-machine
+        state: started
+        ignore_volatile_options: true
+        wait_for_ipv4_addresses: true
+        profiles: ["mji"]
+        source:
+          protocol: simplestreams
+          type: image
+          mode: pull
+          server: https://images.linuxcontainers.org
+          alias: ubuntu/kinetic/amd64
+        timeout: 600

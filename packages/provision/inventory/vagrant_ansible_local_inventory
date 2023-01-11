@@ -1,0 +1,4 @@
+linux_workspace ansible_connection=local
+
+[containers]
+slave_vm ansible_connection=lxd

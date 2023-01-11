@@ -22,6 +22,7 @@ Vagrant.configure("2") do |config|
 
     ws.vm.provision "ansible_local" do |ansible|
       ansible.become = true
+      ansible.inventory_path = "inventory/vagrant_ansible_local_inventory"
       ansible.galaxy_roles_path = "/etc/ansible/roles"
       ansible.galaxy_role_file = "requirements.yml"
       ansible.galaxy_command = "sudo ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force"
@@ -33,7 +34,7 @@ Vagrant.configure("2") do |config|
       vb.gui = false
       vb.cpus = 2
       vb.memory = DEFAULT_RAM
-      vb.customize ["modifyvm", :id, "--cpuexecutioncap", "100"]
+      vb.customize ["modifyvm", :id, "--cpuexecutioncap", "100", "--nested-hw-virt", "on"]
     end
   end
 
