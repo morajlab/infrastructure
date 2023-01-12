@@ -4,8 +4,9 @@ const spinners = require('cli-spinners');
 const crc = require('create-react-class');
 const { URL } = require('url');
 const { TaskList, Task } = require('ink-task-list');
+const { exec } = require('child_process');
 const { simpleGit } = require('simple-git');
-const { render } = require('ink');
+const { render, Box, Text } = require('ink');
 
 const mjwConfig = require('../mjw.config.json');
 
@@ -16,6 +17,12 @@ const TASK_STATES = {
   LOADING: 'loading',
 };
 const ce = React.createElement;
+
+function _render(component) {
+  console.clear();
+
+  render(component);
+}
 
 function installHusky() {
   const promise = new Promise((resolve, _reject) => {
@@ -62,6 +69,25 @@ function installSubmodules() {
   return promises_array;
 }
 
+function installRubyGems() {
+  const promise = new Promise((resolve, reject) => {
+    exec(
+      'gem instalfl bundler prettier_print syntax_tree syntax_tree-haml syntax_tree-rbs',
+      (error, stdout) => {
+        if (error) {
+          reject(error);
+
+          return;
+        }
+
+        resolve(stdout);
+      }
+    );
+  });
+
+  return [promise];
+}
+
 const tasks = [
   {
     label: 'Install Husky',
@@ -71,37 +97,111 @@ const tasks = [
     label: 'Install Submodules',
     func: installSubmodules,
   },
+  {
+    label: 'Install Ruby Gems',
+    func: installRubyGems,
+  },
 ];
 
-const TasksComponents = [];
+function TasksComponent() {
+  const TaskItemArray = [];
 
-tasks.forEach((task, key) => {
+  tasks.forEach((task) => {
+    const component = crc({
+      getInitialState: function () {
+        return { state: TASK_STATES.LOADING };
+      },
+      componentDidMount: function () {
+        Promise.all(task.func())
+          .then(() => {
+            this.setState({ state: TASK_STATES.SUCCESS });
+          })
+          .catch((error) => {
+            // this.props.addErrorCallback(error.toString());
+            this.props.addErrorCallback('error.toString()');
+            this.setState({ state: TASK_STATES.ERROR });
+          });
+      },
+      render: function () {
+        const label =
+          task.label ?? task.func.name.replaceAll('_', ' ').toUpperCase();
+
+        return ce(Task, {
+          label,
+          state: this.state.state,
+          spinner:
+            this.state.state == TASK_STATES.LOADING ? spinners.dots : null,
+        });
+      },
+    });
+
+    TaskItemArray.push((addErrorCallback) =>
+      ce(component, { addErrorCallback })
+    );
+  });
+
+  return crc({
+    render: function () {
+      const ItemArray = [];
+
+      TaskItemArray.forEach((item) => {
+        ItemArray.push(item(this.props.addErrorCallback));
+      });
+
+      return ce(
+        Box,
+        { borderStyle: 'single' },
+        ce(TaskList, null, ...ItemArray)
+      );
+    },
+  });
+}
+
+function ErrorsComponent() {
+  return crc({
+    render: function () {
+      const err_components = [];
+
+      if (this.props.errors) {
+        this.props.errors.forEach((err) => {
+          err_components.push(ce(Text, { color: 'red' }, err));
+        });
+      }
+
+      if (err_components.length == 0) {
+        return null;
+      }
+
+      return ce(
+        Box,
+        { borderStyle: 'single', borderColor: 'red' },
+        ...err_components
+      );
+    },
+  });
+}
+
+function AppComponent() {
   const component = crc({
     getInitialState: function () {
-      return { state: TASK_STATES.LOADING };
+      return {
+        errors: [],
+      };
     },
-    componentDidMount: function () {
-      Promise.all(task.func())
-        .then(() => {
-          this.setState({ state: TASK_STATES.SUCCESS });
-        })
-        .catch(() => {
-          this.setState({ state: TASK_STATES.ERROR });
-        });
+    addError: function (error) {
+      this.setState({ errors: [...this.state.errors, error] });
     },
     render: function () {
-      const label =
-        task.label ?? task.func.name.replaceAll('_', ' ').toUpperCase();
-
-      return ce(Task, {
-        label,
-        state: this.state.state,
-        spinner: this.state.state == TASK_STATES.LOADING ? spinners.dots : null,
-      });
+      return ce(
+        React.Fragment,
+        null,
+        ce(TasksComponent(), { addErrorCallback: this.addError }),
+        ce(ErrorsComponent(), { errors: this.state.errors })
+      );
     },
   });
 
-  TasksComponents.push(ce(component, { key }));
-});
+  return ce(component);
+}
 
-render(ce(TaskList, null, TasksComponents));
+_render(AppComponent());
