@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: linux_workspace
   become: true
   tasks:
     - name: Update and upgrade apt packages
@@ -49,6 +49,10 @@
           limits.cpu: "1"
           limits.memory: "2GB"
         devices:
+          eth0:
+            nictype: bridged
+            parent: lxdbr0
+            type: nic
           root:
             path: /
             pool: default
@@ -70,3 +74,10 @@
           server: https://images.linuxcontainers.org
           alias: ubuntu/kinetic/amd64
         timeout: 600
+
+- hosts:
+    - slave-vm
+  tasks:
+    - name: Provision LXD container
+      shell:
+        cmd: pwd
