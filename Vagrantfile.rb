@@ -21,12 +21,12 @@ Vagrant.configure("2") do |config|
                         create: true
 
     ws.vm.provision "ansible_local" do |ansible|
-      ansible.become = true
-      ansible.inventory_path = "inventory/inventory"
       ansible.galaxy_roles_path = "/etc/ansible/roles"
       ansible.galaxy_role_file = "requirements.yml"
       ansible.galaxy_command = "sudo ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force"
       ansible.playbook = "playbook.yml"
+      ansible.limit = "all"
+      ansible.version = "latest"
     end
 
     ws.vm.provider "virtualbox" do |vb|

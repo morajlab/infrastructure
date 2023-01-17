@@ -46,8 +46,8 @@
         description: MJI containers profile
         state: present
         config:
-          limits.cpu: "1"
-          limits.memory: "2GB"
+          limits.cpu: '1'
+          limits.memory: '2GB'
         devices:
           eth0:
             nictype: bridged
@@ -59,25 +59,67 @@
             size: 20GB
             type: disk
 
-    - name: Create slave vm
+    - name: Create SSH keys directory
+      ansible.builtin.file:
+        path: ~/.lxd-ssh
+        state: directory
+
+    - name: Create SSH key
+      community.crypto.openssh_keypair:
+        path: ~/.lxd-ssh/id_rsa
+      register: lxd_ssh_key
+
+    - name: Create LXD servers
+      register: lxd_servers
+      loop:
+        - slave-vm
       community.general.lxd_container:
-        name: slave-vm
+        name: '{{ item }}'
         type: virtual-machine
         state: started
-        ignore_volatile_options: true
+        wait_for_container: true
         wait_for_ipv4_addresses: true
-        profiles: ["mji"]
+        profiles: ['mji']
         source:
           protocol: simplestreams
           type: image
           mode: pull
           server: https://images.linuxcontainers.org
-          alias: ubuntu/kinetic/amd64
+          alias: ubuntu/kinetic/cloud
+        config:
+          cloud-init.user-data: |
+            #cloud-config
+            ssh_pwauth: false
+
+            users:
+            - name: mji
+              gecos: MJI User
+              groups: users,admin,wheel
+              sudo: ALL=(ALL) NOPASSWD:ALL
+              shell: /bin/bash
+              lock_passwd: true
+              ssh_authorized_keys:
+                - {{ lxd_ssh_key.public_key }}
+
+            packages:
+              - openssh-server
         timeout: 600
 
-- hosts:
-    - slave-vm
+    - name: Add LXD server hosts
+      loop: '{{ lxd_servers.results }}'
+      loop_control:
+        label: '{{ item.item }}'
+      ansible.builtin.add_host:
+        name: '{{ item.item }}'
+        groups: containers
+        ansible_user: mji
+        ansible_host: '{{ item.addresses.eth0[0] }}'
+        ansible_ssh_private_key_file: ~/.lxd-ssh/id_rsa
+        ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+        ansible_become: true
+
+- hosts: containers
   tasks:
     - name: Provision LXD container
-      shell:
-        cmd: pwd
+      debug:
+        msg: 'This is from inside lxd :)'
