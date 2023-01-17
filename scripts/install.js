@@ -1,22 +1,39 @@
-const React = require('react');
 const Husky = require('husky');
 const spinners = require('cli-spinners');
-const crc = require('create-react-class');
+const { createElement, useState, useEffect } = require('react');
 const { URL } = require('url');
 const { TaskList, Task } = require('ink-task-list');
 const { exec } = require('child_process');
 const { simpleGit } = require('simple-git');
+const { Provider, useSelector, useDispatch } = require('react-redux');
+const { configureStore, createSlice } = require('@reduxjs/toolkit');
 const { render, Box, Text } = require('ink');
 
 const mjwConfig = require('../mjw.config.json');
-
 const TASK_STATES = {
   ERROR: 'error',
   SUCCESS: 'success',
   PENDING: 'pending',
   LOADING: 'loading',
 };
-const ce = React.createElement;
+const ce = createElement;
+const errorSlice = createSlice({
+  name: 'error',
+  initialState: {
+    value: [],
+  },
+  reducers: {
+    addError: (state, action) => {
+      state.value = [action.payload, ...state.value];
+    },
+  },
+});
+const { addError } = errorSlice.actions;
+const errorStore = configureStore({
+  reducer: {
+    error: errorSlice.reducer,
+  },
+});
 
 function _render(component) {
   console.clear();
@@ -46,7 +63,7 @@ function installSubmodules() {
 
   const options = submodules.options ?? {};
   const promises_array = [
-    simpleGit().submoduleUpdate(['--init', '--recursive']),
+    simpleGit().submoduleUpdate(['--init', '--recursfive']), //////
   ];
 
   submodules.modules.forEach((m) => {
@@ -72,7 +89,7 @@ function installSubmodules() {
 function installRubyGems() {
   const promise = new Promise((resolve, reject) => {
     exec(
-      'gem instalfl bundler prettier_print syntax_tree syntax_tree-haml syntax_tree-rbs',
+      'gem instalfl bundler prettier_print syntax_tree syntax_tree-haml syntax_tree-rbs', ///////////
       (error, stdout) => {
         if (error) {
           reject(error);
@@ -107,101 +124,67 @@ function TasksComponent() {
   const TaskItemArray = [];
 
   tasks.forEach((task) => {
-    const component = crc({
-      getInitialState: function () {
-        return { state: TASK_STATES.LOADING };
-      },
-      componentDidMount: function () {
+    const component = () => {
+      const [state, setState] = useState({ state: TASK_STATES.LOADING });
+      const dispatch = useDispatch();
+
+      useEffect(() => {
         Promise.all(task.func())
           .then(() => {
-            this.setState({ state: TASK_STATES.SUCCESS });
+            setState({ state: TASK_STATES.SUCCESS });
           })
           .catch((error) => {
-            // this.props.addErrorCallback(error.toString());
-            this.props.addErrorCallback('error.toString()');
-            this.setState({ state: TASK_STATES.ERROR });
+            dispatch(addError(`${JSON.stringify(error.toString())}\n`));
+            setState({ state: TASK_STATES.ERROR });
           });
-      },
-      render: function () {
-        const label =
-          task.label ?? task.func.name.replaceAll('_', ' ').toUpperCase();
+      }, []);
 
-        return ce(Task, {
-          label,
-          state: this.state.state,
-          spinner:
-            this.state.state == TASK_STATES.LOADING ? spinners.dots : null,
-        });
-      },
-    });
+      const label =
+        task.label ?? task.func.name.replaceAll('_', ' ').toUpperCase();
 
-    TaskItemArray.push((addErrorCallback) =>
-      ce(component, { addErrorCallback })
-    );
-  });
-
-  return crc({
-    render: function () {
-      const ItemArray = [];
-
-      TaskItemArray.forEach((item) => {
-        ItemArray.push(item(this.props.addErrorCallback));
+      return ce(Task, {
+        label,
+        state: state.state,
+        spinner: state.state == TASK_STATES.LOADING ? spinners.dots : null,
       });
+    };
 
-      return ce(
-        Box,
-        { borderStyle: 'single' },
-        ce(TaskList, null, ...ItemArray)
-      );
-    },
+    TaskItemArray.push(ce(component));
   });
+
+  return ce(
+    Box,
+    { borderStyle: 'single' },
+    ce(TaskList, null, ...TaskItemArray)
+  );
 }
 
 function ErrorsComponent() {
-  return crc({
-    render: function () {
-      const err_components = [];
+  const err_components = [];
+  const errors = useSelector((state) => state.error.value);
 
-      if (this.props.errors) {
-        this.props.errors.forEach((err) => {
-          err_components.push(ce(Text, { color: 'red' }, err));
-        });
-      }
+  if (errors.length == 0) {
+    return null;
+  }
 
-      if (err_components.length == 0) {
-        return null;
-      }
-
-      return ce(
-        Box,
-        { borderStyle: 'single', borderColor: 'red' },
-        ...err_components
-      );
-    },
+  errors.forEach((err) => {
+    err_components.push(ce(Text, { color: 'red' }, err));
   });
+
+  return ce(
+    Box,
+    { borderStyle: 'single', borderColor: 'red' },
+    ...err_components
+  );
 }
 
 function AppComponent() {
-  const component = crc({
-    getInitialState: function () {
-      return {
-        errors: [],
-      };
-    },
-    addError: function (error) {
-      this.setState({ errors: [...this.state.errors, error] });
-    },
-    render: function () {
-      return ce(
-        React.Fragment,
-        null,
-        ce(TasksComponent(), { addErrorCallback: this.addError }),
-        ce(ErrorsComponent(), { errors: this.state.errors })
-      );
-    },
-  });
-
-  return ce(component);
+  return ce(
+    Provider,
+    { store: errorStore },
+    ce(TasksComponent),
+    ce(ErrorsComponent)
+  );
 }
 
 _render(AppComponent());
